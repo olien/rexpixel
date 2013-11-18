@@ -1,4 +1,4 @@
- $(function() {
+/* $(function() {
 
 		$( "#slider_opacity" ).slider({
 	
@@ -20,7 +20,7 @@
  
  
  
- 
+	*/
  
  
 

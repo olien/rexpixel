@@ -10,8 +10,8 @@
 		- Grid Einstellung<br/>
 	
 		<?PHP
-		
-		$form = rex_form::factory($table, 'Legende', 'id='. $id, 'post', false);
+		/*
+		$form = rex_form::factory(rex_rexpixel, 'id='. $id, 'post', false);
 
 		if($func == 'edit')
 		{
@@ -22,6 +22,7 @@
 		$field->setLabel('Feldname');
 
 		$form->show();
+		*/
 		?>
 	
 	</div>

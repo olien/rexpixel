@@ -1,10 +1,15 @@
 <?php
+$opacity = htmlspecialchars($_POST["slider_opacity_wert"]);
 
-echo 'sadasd';
+echo "ssdfdfsdf ".$opacity;
 
-$opacity="";
+$sql = rex_sql::factory();
+$db_table = "rex_rexpixel";
+$sql->setTable($db_table);
+$sql->setWhere('id = 1');
+$sql->setValue('opacity','30');
+$sql->update();
 
-if(isset($_POST['opacity'])){$opacity=$_POST['opacity']}
 
-//now do your job with MySql here
 ?>
+dsfsdf
