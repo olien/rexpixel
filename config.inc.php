@@ -73,7 +73,7 @@ function rexpixel($params)
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
 	    $html.='<div id="rpsetting">'.PHP_EOL;		
-	  	$html.='	<div id="rpheader">REXpixel</div>'.PHP_EOL;	
+	  	$html.='	<div id="rpheader">REXpixel<div id="openclose">x</div></div>'.PHP_EOL;	
 		$html.='	<div id="rpcontent">'.PHP_EOL;	
 	  	$html.='	<div id="slider_label">Deckkraft: </div>'.PHP_EOL;
 	  	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
@@ -92,6 +92,7 @@ function rexpixel($params)
 			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
 			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
 		</script>';
+		
 		$scripts.='	<script src="./files/addons/rexpixel/rexpixel.js"></script>'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dark-hive/jquery-ui.css" />'.PHP_EOL;		

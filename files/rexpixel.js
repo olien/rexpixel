@@ -2,7 +2,7 @@
 
 		$('#rpsetting').draggable();
 		
-$('#rpheader').click(function() {
+$('#openclose').click(function() {
        $('#rpheader').toggleClass('close');
        $('#rpcontent').toggleClass('close');	   
 });

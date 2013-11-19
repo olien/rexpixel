@@ -1,54 +1,51 @@
+@import url(http://fonts.googleapis.com/css?family=Orbitron:500);
+
 
 #rpsetting {
   position: absolute;
   top: 10px;
   right: 10px;
   width: 250px;
+	
+  padding: 8px;
 
-color: #fff;
+  color: #fff;
+font-family: 'Orbitron', sans-serif;   
  opacity: 0.9;
  
- background: #96A6A6;
+ background: #22313F;
 
  -webkit-box-shadow: -1px -1px 10px rgba(50, 50, 50, 0.75);
  -moz-box-shadow:    -1px -1px 10px rgba(50, 50, 50, 0.75);
  box-shadow:         -1px -1px 10px rgba(50, 50, 50, 0.75);
- 
- 
- -webkit-border-radius: 5px;
- -moz-border-radius: 5px;
- border-radius: 5px;
- border-right: 1px solid #424E55;
- border-bottom: 1px solid #424E55;
-  border-left: 1px solid #5F717B;
-   border-top: 1px solid #5F717B;
-    
+   
  
   }
   
 #rpcontent {
-
+margin: 15px 0 0 0;
 height: 300px;
 
-
-
- color: #fff;
 
 }
 
 #rpheader {
-	height: 35px;
-	width: 248px;
-	
-	font-size: 16px;
+	float: left;
+	width: 100%;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+#openclose {
+width: 20px;
+float: right;
 
 }
 
-#rpheader.close {
-	
-
+#openclose:hover {
+cursor: pointer;
+color: #000;
 }
-
 
 
 
