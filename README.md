@@ -1,7 +1,8 @@
 REXpixel AddOn für REDAXO 4.5
 ===================================
 
-lorem
+REXpixel ermöglicht es ein Bild in einem Layer im Frontend darzustellen.
+
 
 
 Features
