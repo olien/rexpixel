@@ -9,14 +9,9 @@
 		- Grid anzeigen<br/>
 		- Grid Einstellung<br/>
 	
-		<?PHP
+		<?php
 		/*
 		$form = rex_form::factory(rex_rexpixel, 'id='. $id, 'post', false);
-
-		if($func == 'edit')
-		{
-		   $form->addParam('id', $id);
-		}
    
 		$field =& $form->addMedialistField('field');
 		$field->setLabel('Feldname');
@@ -24,6 +19,7 @@
 		$form->show();
 		*/
 		?>
+	
 	
 	</div>
 	

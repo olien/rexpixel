@@ -17,28 +17,31 @@ $REX['ADDON']['dev_tools']['bild'] = '';
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
 
+// Gucken ob mit der URL eine var mitgegeben wurde und dann auswerten
+$wert = rex_request('rexpixel_opacity', 'string', 0);
+
+if ($wert <> 0) {
+	
+   $sql = rex_sql::factory();
+     $db_table = "rex_rexpixel";
+     $sql->setTable($db_table);
+     $sql->setWhere('id = 1');
+     $sql->setValue('opacity', $wert);
+     $sql->update();
+}
+
+
 function rexpixel($params)
 {
   global $REX;
-  
-
-  
-  function opacity_schreiben($wert) {
- $sql = rex_sql::factory();
-   $db_table = "rex_rexpixel";
-   $sql->setTable($db_table);
-   $sql->setWhere('id = 1');
-   $sql->setValue('opacity', $wert);
-   $sql->update();
-  }
-  
-
 
   // Werte holen
   $sql = rex_sql::factory();
-  $db_table = "rex_rexpixel";
-  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
-  $opacity = $sql->getValue('opacity');
+	  $db_table = "rex_rexpixel";
+	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
+	  $opacity = $sql->getValue('opacity');
+	  $bilder = $sql->getValue('images');	  
+	  
 
   $output = $params['subject'];
 
@@ -46,6 +49,12 @@ function rexpixel($params)
   $html = PHP_EOL;  
   if (!$REX['REDAXO'])
   {
+
+	  if ($bilder == "default.jpg") {
+		 // echo "default";
+	  }
+
+
 
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
@@ -60,8 +69,13 @@ function rexpixel($params)
     	$html.='<!-- /REXpixel -->'.PHP_EOL;
 
     	$scripts.='<!-- REXpixel -->'.PHP_EOL;
-		$scripts.='	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>'.PHP_EOL;
-		$scripts.='	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>'.PHP_EOL;		
+
+		// jQuery + UI nur laden wenn nicht vorher schon jQuery geladen wurde
+		$scripts.=' 
+		<script type="text/javascript">
+			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\x3C/script>");
+				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\">\x3C/script>");
+		</script>';
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dark-hive/jquery-ui.css" />'.PHP_EOL;		
 		
@@ -81,30 +95,24 @@ $(function() {
 		},
     change: function(event, ui) {
            if (event.originalEvent) {
-               alert(ui.value);
+           //    alert(ui.value);
+					
+				slider_control_value = ui.value;
+					
+					$.ajax({
+					type: "POST",
+					url: "index.php?rexpixel_opacity="+slider_control_value,
+					async: true,
+					data: "slider_control_value="+slider_control_value,
 
-
-			   slider_control_value = ui.value;
-			   $.ajax({
-			   type: "POST",
-			   dataType: "text",
-			   url: "./files/addons/rexpixel/rexpixel.php",
-			   async: true,
-			   data: "slider_opacity_wert="+slider_control_value,
-			   success: function(msg){
-			   // msg will be whatever the php script echos out
-			           // perhaps a JSON string that indicates whether or not
-			           // the save to the database was successful or not
-			          alert(msg);
-			        }
-			     });
+				  });
         } }
-
 	});
 });
 </script>
 ';
 
+		
     	$scripts.='<!-- /REXpixel -->'.PHP_EOL;
   }
 
