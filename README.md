@@ -9,15 +9,10 @@ ToDo
 
 * Swap z-Index
 * "richtiges" Bild darstellen
+* Bild Position (linksbündig, zentriert, Pixel)
 * Bilder DropDown
 
 
-Features
---------
-
-* dsfsdf
-* dfs sdf
-
 Hinweise
 --------
 
@@ -37,33 +32,4 @@ siehe [LICENSE.md](LICENSE.md)
 Credits
 -------
 
-* Danke an 
-
-
-
-Features
---------
-
-* dsfsdf
-* dfs sdf
-
-Hinweise
---------
-
-* Getestet mit REDAXO 4.5
-* Addon-Ordner lautet: `rexpixel`
-
-Changelog
----------
-
-siehe [CHANGELOG.md](CHANGELOG.md)
-
-Lizenz
-------
-
-siehe [LICENSE.md](LICENSE.md)
-
-Credits
--------
-
-* Danke an 
+* Danke an Andreas Eberhard
