@@ -55,16 +55,32 @@ function rexpixel($params)
 	  }
 
 
+	  $css.='
+	  <style>
+	  #rexpixel {
+	    position:fixed;
+	    top: 0;
+	    opacity:0.5;
+	    width:100%;
+	    height:100%;
+	    z-index: -1;
+	    background: url(./files/addons/rexpixel/default.jpg) top center no-repeat;
+	  }
+	</style>
+		 '; 
+		  
 
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
-	   $html.='<div id="rpsetting">'.PHP_EOL;		
-	  	$html.='	<span class="text">REX<i>pixel</i></span>'.PHP_EOL;	
-		
-		
-	  	$html.='	<div id="slider_opacity"></div><div id="opacity_wert">'.$opacity.' %</div> '.PHP_EOL;
-	  	$html.='	<input id="cbox" type="checkbox" value="checked">'.PHP_EOL;
-		$html.='	<span id="test">test</span>'.PHP_EOL;
+	    $html.='<div id="rpsetting">'.PHP_EOL;		
+	  	$html.='	<div id="rpheader">REXpixel</div>'.PHP_EOL;	
+		$html.='	<div id="rpcontent">'.PHP_EOL;	
+	  	$html.='	<div id="slider_label">Deckkraft: </div>'.PHP_EOL;
+	  	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
+		$html.='	<div id="opacity_wert">'.$opacity.' %</div> '.PHP_EOL;
+		$html.='	<label for="zcheck">Niedrigster z-Index: </label>'.PHP_EOL;
+	  	$html.='	<input id="zcheck" type="checkbox" checked="true">'.PHP_EOL;
+		$html.='	</div>'.PHP_EOL;	
 		$html.='</div>'.PHP_EOL;
     	$html.='<!-- /REXpixel -->'.PHP_EOL;
 
@@ -73,14 +89,16 @@ function rexpixel($params)
 		// jQuery + UI nur laden wenn nicht vorher schon jQuery geladen wurde
 		$scripts.=' 
 		<script type="text/javascript">
-			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\x3C/script>");
-				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\">\x3C/script>");
+			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
+			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
 		</script>';
+		$scripts.='	<script src="./files/addons/rexpixel/rexpixel.js"></script>'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dark-hive/jquery-ui.css" />'.PHP_EOL;		
 		
 $scripts.='
 <script>
+	
 $(function() {
 
 	$( "#slider_opacity" ).slider({
@@ -116,6 +134,7 @@ $(function() {
     	$scripts.='<!-- /REXpixel -->'.PHP_EOL;
   }
 
+	  $output = str_replace('</head>',$css.'</head>',$output);  
 	  $output = str_replace('</body>',$html.'</body>',$output);  
      $output = str_replace('</head>',$scripts.'</head>',$output);
 
