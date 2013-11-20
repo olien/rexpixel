@@ -1,68 +1,108 @@
-@import url(http://fonts.googleapis.com/css?family=Orbitron:500);
+@import url(http://fonts.googleapis.com/css?family=Orbitron:400,500);
 
 
 #rpsetting {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 250px;
-	
-  padding: 8px;
+  width: 270px;
 
-  color: #fff;
+font-weight: 400;
 font-family: 'Orbitron', sans-serif;   
- opacity: 0.9;
- 
- background: #22313F;
+color: grey;
+
+
+
+	 opacity: 0.8;
+
+ background: #fff;
 
  -webkit-box-shadow: -1px -1px 10px rgba(50, 50, 50, 0.75);
  -moz-box-shadow:    -1px -1px 10px rgba(50, 50, 50, 0.75);
  box-shadow:         -1px -1px 10px rgba(50, 50, 50, 0.75);
-   
- 
+  
+ -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px; 
+  
+  
+ border: 2px solid grey;
+
   }
   
-#rpcontent {
-margin: 15px 0 0 0;
-height: 300px;
-
-
+  
+#rpsetting:hover {
+	opacity: 1;
 }
 
 #rpheader {
+	color: grey;
 	float: left;
-	width: 100%;
+	font-weight: 500;
+	width: 250px;
+	line-height: 1;
 	font-size: 14px;
-	line-height: 1.2;
+	padding: 8px 8px 6px 8px;
 }
 
-#openclose {
-width: 20px;
-float: right;
 
+#rpheader #openclose {
+	color: grey;
+	font-size: 14px;
+	float: right;
+
+}
+
+#rpheader:hover {
+	color: #000;
+	cursor: move;
 }
 
 #openclose:hover {
-cursor: pointer;
-color: #000;
+	color: #000;
+	cursor: pointer;
 }
 
+#rpcontent {
+	clear: both;
+	margin: 5px 0 0 0;
+	padding: 0 8px 6px 8px;
+	border-top: 1px ridge grey;
+}
 
 
 #rpcontent.close {
-display: none;
+	display: none;
 }
 
+.titel {
+	width: 100%;
+	float: left;
+	font-size: 10px;	
+	color: grey;
+	margin: 8px 0 8px 0;
+}
 
+.links {
+	float: left;
+	width: 100px;
+	color: #222;
+	font-family: verdana;
+	font-size: 10px;
+}
+
+.rechts {
+	float: right;
+	width: 170px;
+}
 
 #slider_opacity {
 	float: left;
-	width: 100px;
+	width: 150px;
 }
 
-#opacity_wert {
-margin: 0 0 0 10px;
-	width: 20px;
-	color: #000;
-	float: left;
+
+input[type="checkbox"] {
+	border: 1px solid grey;
 }
