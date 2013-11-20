@@ -4,7 +4,7 @@ $mypage = "rexpixel";
 $REX['ADDON']['rxid'][$mypage] = 'xxx';
 $REX['ADDON']['name'][$mypage] = 'REXpixel';
 $REX['ADDON']['page'][$mypage] = $mypage;
-$REX['ADDON']['version'][$mypage] = "0.0";
+$REX['ADDON']['version'][$mypage] = "0.01";
 $REX['ADDON']['author'][$mypage] = "Oliver Kreischer";
 $REX['ADDON']['supportpage'][$mypage] = 'forum.redaxo.de';
 $REX['ADDON']['perm'][$mypage] = $mypage . "[]";
@@ -16,9 +16,9 @@ $REX['ADDON']['dev_tools']['bild'] = '';
 
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
-
 // Gucken ob mit der URL eine var mitgegeben wurde und dann auswerten
 $wert = rex_request('rexpixel_opacity', 'string', 0);
+
 
 if ($wert <> 0) {
 	
@@ -45,6 +45,7 @@ function rexpixel($params)
 
   $output = $params['subject'];
 
+
   $scripts = PHP_EOL;
   $html = PHP_EOL;  
   $css = PHP_EOL;    
@@ -70,17 +71,20 @@ function rexpixel($params)
 	</style>
 		 '; 
 		  
-
+		
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
 	    $html.='<div id="rpsetting">'.PHP_EOL;		
-	  	$html.='	<div id="rpheader">REXpixel<div id="openclose">x</div></div>'.PHP_EOL;	
+	  	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
 		$html.='	<div id="rpcontent">'.PHP_EOL;	
-	  	$html.='	<div id="slider_label">Deckkraft: </div>'.PHP_EOL;
+	  	$html.='	<div class="titel">Layout Vorlage</div>'.PHP_EOL;
+	  	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
 	  	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
-		$html.='	<div id="opacity_wert">'.$opacity.' %</div> '.PHP_EOL;
-		$html.='	<label for="zcheck">Niedrigster z-Index: </label>'.PHP_EOL;
+		$html.='	<div class="rechts"></div> '.PHP_EOL;
+		$html.='	<div class="links">z-Index ändern</div>'.PHP_EOL;
 	  	$html.='	<input id="zcheck" type="checkbox" checked="true">'.PHP_EOL;
+	  	$html.='	<div class="titel">Lineal</div>'.PHP_EOL;
+	  	$html.='	<div class="titel">Raster</div>'.PHP_EOL;		
 		$html.='	</div>'.PHP_EOL;	
 		$html.='</div>'.PHP_EOL;
     	$html.='<!-- /REXpixel -->'.PHP_EOL;
@@ -110,7 +114,7 @@ $(function() {
 	max: 100,
 	value: '.$opacity.',
 	slide: function( event, ui ) {
-		$( "#opacity_wert" ).html( ui.value+"%");
+		$( "#opacity_wert" ).html(ui.value);
 		$( "#rexpixel" ).css("opacity", ui.value/100  );
 		},
     change: function(event, ui) {
