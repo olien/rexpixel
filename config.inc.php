@@ -47,6 +47,7 @@ function rexpixel($params)
 
   $scripts = PHP_EOL;
   $html = PHP_EOL;  
+  $css = PHP_EOL;    
   if (!$REX['REDAXO'])
   {
 
