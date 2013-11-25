@@ -1,15 +1,13 @@
-	$(function(){
+$(function(){
 
-
-		 $( "#rpsetting" ).draggable({ handle: "#rpheader" });
-
+  //  $( "#rpsetting" ).draggable({ handle: "#rpheader" });
 	
-
+	
 		
 $('#openclose').click(function() {
        $('#rpheader').toggleClass('close');
        $('#rpcontent').toggleClass('close');	   
-	  $('#openclose').text($('#openclose').text() == 'X' ? 'O' : 'X');
+	   $('#openclose').text($('#openclose').text() == 'X' ? 'O' : 'X');
 });
 
 

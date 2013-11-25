@@ -17,16 +17,33 @@ $REX['ADDON']['dev_tools']['bild'] = '';
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
 // Gucken ob mit der URL eine var mitgegeben wurde und dann auswerten
-$wert = rex_request('rexpixel_opacity', 'string', 0);
+$opacitywert 	= rex_request('rexpixel_opacity', 'string', NULL);
+$position_left 	= rex_request('rexpixel_position_left', 'string', NULL);
+$position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
+
+if ($position_left[0] <> 0) {
+
+   $sql = rex_sql::factory();
+     $db_table = "rex_rexpixel";
+     $sql->setTable($db_table);
+     $sql->setWhere('id = 1');
+     $sql->setValue('posleft', $position_left);
+     $sql->setValue('postop',  $position_top);	 
+     $sql->update();
+ }
 
 
-if ($wert <> 0) {
+
+if ($opacitywert <> 0) {
+	
+	
+
 	
    $sql = rex_sql::factory();
      $db_table = "rex_rexpixel";
      $sql->setTable($db_table);
      $sql->setWhere('id = 1');
-     $sql->setValue('opacity', $wert);
+     $sql->setValue('opacity', $opacitywert);
      $sql->update();
 }
 
@@ -40,8 +57,9 @@ function rexpixel($params)
 	  $db_table = "rex_rexpixel";
 	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $opacity = $sql->getValue('opacity');
-	  $bilder = $sql->getValue('images');	  
-	  
+	  $bilder = $sql->getValue('images');
+  	  $positionlinks = $sql->getValue('posleft');	  
+  	  $positionoben = $sql->getValue('postop');	  	  
 
   $output = $params['subject'];
 
@@ -59,8 +77,15 @@ function rexpixel($params)
 
 	  $css.='
 	  <style>
+		#rpsetting {
+		   position: absolute;
+		   top: '.$positionoben.'px;
+		   left: '.$positionlinks.'px;
+		}
+
 	  #rexpixel {
 	    position:fixed;
+		
 	    top: 0;
 	    opacity:0.5;
 	    width:100%;
@@ -123,15 +148,36 @@ $(function() {
 					
 				slider_control_value = ui.value;
 					
-					$.ajax({
+				$.ajax({
 					type: "POST",
 					url: "index.php?rexpixel_opacity="+slider_control_value,
-					async: true,
-					data: "slider_control_value="+slider_control_value,
-
-				  });
+					async: true
+   			    });
         } }
 	});
+	
+	$( "#rpsetting" ).draggable({ handle: "#rpheader",
+	    stop: function(event, ui) {
+			
+			Stoppos = $(this).position();
+
+			// alert("STOP: \nLeft: "+ Stoppos.left + "\nTop: " + Stoppos.top);
+			
+			$.ajax({
+				type: "POST",
+				url: "index.php?rexpixel_position_left="+Stoppos.left+"&rexpixel_position_top="+Stoppos.top,
+				async: true
+		    });
+			
+	    }
+	});
+	
+	
+	
+	
+	
+	
+	
 });
 </script>
 ';
