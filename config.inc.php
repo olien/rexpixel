@@ -20,6 +20,18 @@ rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 $opacitywert 	= rex_request('rexpixel_opacity', 'string', NULL);
 $position_left 	= rex_request('rexpixel_position_left', 'string', NULL);
 $position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
+$zindex 		= rex_request('rexpixel_zindex', 'string', NULL);
+
+if ($zindex) {
+	   $sql = rex_sql::factory();
+	     $db_table = "rex_rexpixel";
+	     $sql->setTable($db_table);
+	     $sql->setWhere('id = 1');
+	     $sql->setValue('zindex', $zindex );
+	     $sql->update();
+}
+
+
 
 if ($position_left[0] <> 0) {
 
@@ -32,13 +44,8 @@ if ($position_left[0] <> 0) {
      $sql->update();
  }
 
-
-
 if ($opacitywert <> 0) {
-	
-	
-
-	
+		
    $sql = rex_sql::factory();
      $db_table = "rex_rexpixel";
      $sql->setTable($db_table);
@@ -46,6 +53,8 @@ if ($opacitywert <> 0) {
      $sql->setValue('opacity', $opacitywert);
      $sql->update();
 }
+
+
 
 
 function rexpixel($params)
@@ -59,7 +68,8 @@ function rexpixel($params)
 	  $opacity = $sql->getValue('opacity');
 	  $bilder = $sql->getValue('images');
   	  $positionlinks = $sql->getValue('posleft');	  
-  	  $positionoben = $sql->getValue('postop');	  	  
+  	  $positionoben = $sql->getValue('postop');
+	  $zindex = $sql->getValue('zindex');
 
   $output = $params['subject'];
 
@@ -171,10 +181,99 @@ $(function() {
 			
 	    }
 	});
+	';
+	
+
+if ($zindex == 'drunter') {
+
+$scripts.=' 
+	$("#zcheck").attr("checked", false);
+	 $("#rexpixel").css("z-index", "-1")
+';
+
+} else {
+
+$scripts.='
+	$("#zcheck").attr("checked", true);
+
+		$(function(){
+   	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
+   	        	if($(e).css("position")=="absolute")
+   	            	return parseInt($(e).css("z-index"))||1 ;
+   	            })
+   			);
+   		      $("#rexpixel").css("z-index", maxZ)
+   		      $("#rpsetting").css("z-index", maxZ+1)
+
+   	 	 });
+
+
+';
+
+
+}
+	
+$scripts.='
+
+
+	$("#zcheck").change(function() {
+	   
+	    if(this.checked) {
+	
+		z = "drueber";
+
+   		 $(function(){
+   	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
+   	        	if($(e).css("position")=="absolute")
+   	            	return parseInt($(e).css("z-index"))||1 ;
+   	            })
+   			);
+   			  // alert(maxZ);
+   	          $("#rexpixel").css("z-index", maxZ)
+   		      $("#rpsetting").css("z-index", maxZ+1)
+
+   	 	 });
+
+
+	    } else {
+
+         $("#rexpixel").css("z-index", "-1")
+	         z = "drunter";
+
+ 		
+	
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "index.php?rexpixel_zindex="+z,
+			async: true
+		});
+
+	});
+
+
+
+
 	
 	
+	$("#openclose").click(function() {
+
+       $("#rpheader").toggleClass("close");
+       $("#rpcontent").toggleClass("close");	   
+	   $("#openclose").text($("#openclose").text() == "X" ? "O" : "X");
+
 	
-	
+
+		$.ajax({
+			type: "POST",
+			url: "index.php?"+offen,
+			async: true
+		});
+
+
+});
+
 	
 	
 	
