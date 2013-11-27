@@ -72,8 +72,6 @@ function rexpixel($params)
 	  $zindex 			= $sql->getValue('zindex');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
 
-
-
   $output = $params['subject'];
 
   $scripts = PHP_EOL;
@@ -82,10 +80,22 @@ function rexpixel($params)
   if (!$REX['REDAXO'])
   {
 
+	  if ($opacity == 0) {
+		 $opacity_str = 'opacity: 0;';
+	  } else if ($opacity < 10) {
+      	 $opacity_str = 'opacity: 0.0'.$opacity.';';
+	  } else if ($opacity == 100) {
+	  	 $opacity_str = 'opacity: 1;';
+      } else {
+      	 $opacity_str = 'opacity: 0.'.$opacity.';';
+      }
+
 	  if ($bilder == "default.jpg") {
 		 // echo "default";
 	  }
 
+	var_dump($opacity);
+	var_dump($opacity_str);
 
 	  $css.='
 	  <style>
@@ -98,7 +108,7 @@ function rexpixel($params)
 	  #rexpixel {
 	    position:fixed;
 		top: 0;
-	    opacity: '.$opacity.';
+	    '.$opacity_str.'
 	    width:100%;
 	    height:100%;
 	    z-index: -1;
