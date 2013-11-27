@@ -65,14 +65,16 @@ function rexpixel($params)
   $sql = rex_sql::factory();
 	  $db_table = "rex_rexpixel";
 	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
-	  $opacity = $sql->getValue('opacity');
-	  $bilder = $sql->getValue('images');
-  	  $positionlinks = $sql->getValue('posleft');	  
-  	  $positionoben = $sql->getValue('postop');
-	  $zindex = $sql->getValue('zindex');
+	  $opacity 			= $sql->getValue('opacity');
+	  $bilder 			= $sql->getValue('images');
+  	  $positionlinks 	= $sql->getValue('posleft');	  
+  	  $positionoben 	= $sql->getValue('postop');
+	  $zindex 			= $sql->getValue('zindex');
+	  $layoutposition 	= $sql->getValue('layoutpos');	  
+
+
 
   $output = $params['subject'];
-
 
   $scripts = PHP_EOL;
   $html = PHP_EOL;  
@@ -95,9 +97,8 @@ function rexpixel($params)
 
 	  #rexpixel {
 	    position:fixed;
-		
-	    top: 0;
-	    opacity:0.5;
+		top: 0;
+	    opacity: '.$opacity.';
 	    width:100%;
 	    height:100%;
 	    z-index: -1;
