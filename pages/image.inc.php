@@ -2,9 +2,6 @@
 
 <h2 class="rex-hl2">Einstellungen Bild Overlay</h2>
 	<div class="rex-area-content">
-		- Position angeben (links,zentriert, rechts)<br/>
-		- Opacity angeben (evtl. Slider im Frontend)
-
 	</div>
 	
 		<?php
