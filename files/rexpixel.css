@@ -11,10 +11,6 @@
 
 
 
-	 opacity: 0.8;
-
- background: #fff;
-
  -webkit-box-shadow: -1px -1px 10px rgba(50, 50, 50, 0.75);
  -moz-box-shadow:    -1px -1px 10px rgba(50, 50, 50, 0.75);
  box-shadow:         -1px -1px 10px rgba(50, 50, 50, 0.75);
@@ -24,8 +20,10 @@
   -khtml-border-radius: 5px;
   border-radius: 5px; 
   
-  
+  	opacity: 0.8;
  border: 2px solid grey;
+
+  background:  url("rp_back.jpg") top center no-repeat;
 
   }
   
