@@ -1,7 +1,7 @@
 <?php
 
-// gewähltes Bild speichern
-// openclose speichern
+error_reporting(E_ALL);
+
 
 $mypage = "rexpixel";
 
@@ -26,11 +26,15 @@ rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 $opacitywert 	= rex_request('rexpixel_opacity', 'string', NULL);
 $position_left 	= rex_request('rexpixel_position_left', 'string', NULL);
 $position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
+$openclose 		= rex_request('rexpixel_status', 'string', NULL);
 $zindex 		= rex_request('rexpixel_zindex', 'string', NULL);
+$aktivesbild	= rex_request('rexpixel_bildaktiv', 'string', NULL);
+
+
+$db_table = "rex_rexpixel";
 
 if ($zindex) {
 	$sql = rex_sql::factory();
-	$db_table = "rex_rexpixel";
 	$sql->setTable($db_table);
 	$sql->setWhere('id = 1');
 	$sql->setValue('zindex', $zindex );
@@ -39,16 +43,31 @@ if ($zindex) {
 
 if ($position_left[0] <> 0) {
    $sql = rex_sql::factory();
-   $db_table = "rex_rexpixel";
    $sql->setTable($db_table);
    $sql->setWhere('id = 1');
    $sql->setValue('posleft', $position_left);
    $sql->setValue('postop',  $position_top);	 
-   $sql->update();}
+   $sql->update();
+}
+
+if ($openclose <> NULL) {
+   $sql = rex_sql::factory();
+   $sql->setTable($db_table);
+   $sql->setWhere('id = 1');
+   $sql->setValue('openclose', $openclose);
+   $sql->update();
+}
+
+if ($aktivesbild <> NULL) {
+   $sql = rex_sql::factory();
+   $sql->setTable($db_table);
+   $sql->setWhere('id = 1');
+   $sql->setValue('aktivesbild', $aktivesbild);
+   $sql->update();
+}
 
 if ($opacitywert <> null) {
 	$sql = rex_sql::factory();
-    $db_table = "rex_rexpixel";
     $sql->setTable($db_table);
     $sql->setWhere('id = 1');
     $sql->setValue('opacity', $opacitywert);
@@ -66,24 +85,26 @@ function rexpixel($params)
 	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
+  	  $aktivesbild 		= $sql->getValue('aktivesbild');
   	  $positionlinks 	= $sql->getValue('posleft');	  
   	  $positionoben 	= $sql->getValue('postop');
+	  $openclose	 	= $sql->getValue('openclose');  
 	  $zindex 			= $sql->getValue('zindex');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
 
-$anzahlderbilder = count($bilder);
+
+	$anzahlderbilder = count($bilder);
 
 
-
-if ($anzahlderbilder == 1 AND $bilder[0] == "default.jpg") {
+if ($anzahlderbilder == 1 OR $bilder[0] == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$bilder[0].');';
+} else if ($aktivesbild == "rex_pixel_default.jpg") {
+	$startbg = 'background-image: url(./files/addons/rexpixel/'.$aktivesbild.');';	
+} else if ($aktivesbild <> null AND $aktivesbild != "rex_pixel_default.jpg") {
+	$startbg = 'background-image: url(./files/'.$aktivesbild.');';
 } else {
 	$startbg = 'background-image: url(./files/'.$bilder[0].');';
 }
-
-// -image","url(./files/addons/rexpixel/"+background+")");
-
-
 
 
   $output = $params['subject'];
@@ -119,14 +140,14 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "default.jpg") {
 	    width:100%;
 	    height:100%;
 	    z-index: -1;
-		'.$startbg.'	
-	    background-position: top center;
+		'.$startbg.'
+	    background-position: top '.$layoutposition.';
 	    background-repeat: no-repeat;
 	  }
 	</style>
 		 '; 
 		  
-	//     background-image: url(./files/addons/rexpixel/default.jpg); 	
+	//     background-image: url(./files/addons/rexpixel/rex_pixel_default.jpg); 	
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
 	    $html.='<div id="rpsetting">'.PHP_EOL;		
@@ -146,7 +167,14 @@ if ($anzahlderbilder > 1) {
 	$html.='<select name="change" id="backgrounds">'.PHP_EOL;
 
 foreach($bilder as $bild) {
-    $html.='<option>'.$bild.'</option>'.PHP_EOL;
+
+	if ($aktivesbild == $bild) {
+		$html.='<option selected>'.$bild.'</option>'.PHP_EOL;
+	} else {
+		$html.='<option>'.$bild.'</option>'.PHP_EOL;	
+	}
+
+    
 }
 	$html.='</select>'.PHP_EOL;
 	$html.='</div>'.PHP_EOL;
@@ -288,11 +316,17 @@ $scripts.='
 		});
 
 	});
+';
 
+if ($openclose == "close") {
+$scripts.='
+	 $("#rpheader").toggleClass("close");
+       $("#rpcontent").toggleClass("close");	   
+	   $("#openclose").text($("#openclose").text() == "X" ? "O" : "X");
+';
+}
 
-
-
-	
+$scripts.='
 	
 	$("#openclose").click(function() {
 
@@ -300,11 +334,16 @@ $scripts.='
        $("#rpcontent").toggleClass("close");	   
 	   $("#openclose").text($("#openclose").text() == "X" ? "O" : "X");
 
-	
+	   if ($("#rpheader").hasClass("close")) {
+	   		status = "close";
+	   } else {
+	   		status = "open";
+	   };
+
 
 		$.ajax({
 			type: "POST",
-			url: "index.php?"+offen,
+			url: "index.php?rexpixel_status="+status,
 			async: true
 		});
 
@@ -314,13 +353,30 @@ $scripts.='
 	$("#backgrounds").change(function() {
 	   var background = $(this).find("option:selected").text();
 
-	   if (background == "default.jpg") {
+	   if (background == "rex_pixel_default.jpg") {
 	   		$("#rexpixel").css("background-image","url(./files/addons/rexpixel/"+background+")");
 	   } else {
 	   		$("#rexpixel").css("background-image","url(./files/"+background+")");
 	   }
   
+		$.ajax({
+			type: "POST",
+			url: "index.php?rexpixel_bildaktiv="+background,
+			async: true
+   		   });
+
 	});
+
+
+';
+
+ if ($aktivesbild == null) {
+	$scripts.='	$("#backgrounds option:first").attr("selected","selected");';
+ }
+
+$scripts.='
+
+
 	
 	
 });
