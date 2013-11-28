@@ -31,4 +31,4 @@ siehe [LICENSE.md](LICENSE.md)
 Credits
 -------
 
-* Danke alle Redaxianer und einem Drupal Menschen :-)
+Danke alle Redaxianer und einem Drupal Menschen :-)
