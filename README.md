@@ -7,7 +7,7 @@ REXpixel ermöglicht es Layoutvorlagen in einem Layer im Frontend darzustellen.
 ToDo
 --------
 
-* Issues bechten
+* Issues beachten
 * code aufräumem
 * design, design, design
 
