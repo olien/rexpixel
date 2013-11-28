@@ -7,10 +7,8 @@ REXpixel ermöglicht es ein Bild in einem Layer im Frontend darzustellen.
 ToDo
 --------
 
-* Swap z-Index
-* "richtiges" Bild darstellen
-* Bild Position (linksbündig, zentriert, Pixel)
-* Bilder DropDown
+* code aufräumem
+* design, design, design
 
 
 Hinweise
