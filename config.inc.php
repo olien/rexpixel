@@ -44,7 +44,7 @@ if ($position_left[0] <> 0) {
      $sql->update();
  }
 
-if ($opacitywert <> 0) {
+if ($opacitywert <> null) {
 		
    $sql = rex_sql::factory();
      $db_table = "rex_rexpixel";
@@ -93,9 +93,6 @@ function rexpixel($params)
 	  if ($bilder == "default.jpg") {
 		 // echo "default";
 	  }
-
-	var_dump($opacity);
-	var_dump($opacity_str);
 
 	  $css.='
 	  <style>
