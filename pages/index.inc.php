@@ -13,7 +13,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
 <div class="rex-addon-output">
 <!-- <h2 class="rex-hl2"></h2> -->
   <?php
-    if (rex_get('_msg', 'string')) {
+    if (rex_get('_msg', 'string')) { 
       echo rex_info(rex_get('_msg', 'string'));
     }
     
