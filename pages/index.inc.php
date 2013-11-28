@@ -17,7 +17,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       echo rex_info(rex_get('_msg', 'string'));
     }
     
-    $form = rex_form::factory("rex_rexpixel", "Einstellungen", "id=1", 'post', false);
+    $form = rex_form::factory("rex_rexpixel", "Einstellungen für das Tool", "id=1", 'post', false);
       $field = &$form->addTextField('posleft');
       $field->setLabel("Position von links");
       $field->setAttribute('style','width: 50px');
@@ -26,7 +26,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       $field->setLabel("Position von oben");
       $field->setAttribute('style','width: 50px');
 
-      $form->addFieldset('Einstellungen Layoutbild/er');
+      $form->addFieldset('Einstellungen für das/die Layoutbild/er');
 
       $field =& $form->addMedialistField('images');
       $field->setLabel("Layoutbilder");
