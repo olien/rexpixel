@@ -23,38 +23,31 @@ $position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
 $zindex 		= rex_request('rexpixel_zindex', 'string', NULL);
 
 if ($zindex) {
-	   $sql = rex_sql::factory();
-	     $db_table = "rex_rexpixel";
-	     $sql->setTable($db_table);
-	     $sql->setWhere('id = 1');
-	     $sql->setValue('zindex', $zindex );
-	     $sql->update();
+	$sql = rex_sql::factory();
+	$db_table = "rex_rexpixel";
+	$sql->setTable($db_table);
+	$sql->setWhere('id = 1');
+	$sql->setValue('zindex', $zindex );
+	$sql->update();
 }
-
-
 
 if ($position_left[0] <> 0) {
-
    $sql = rex_sql::factory();
-     $db_table = "rex_rexpixel";
-     $sql->setTable($db_table);
-     $sql->setWhere('id = 1');
-     $sql->setValue('posleft', $position_left);
-     $sql->setValue('postop',  $position_top);	 
-     $sql->update();
- }
+   $db_table = "rex_rexpixel";
+   $sql->setTable($db_table);
+   $sql->setWhere('id = 1');
+   $sql->setValue('posleft', $position_left);
+   $sql->setValue('postop',  $position_top);	 
+   $sql->update();}
 
 if ($opacitywert <> null) {
-		
-   $sql = rex_sql::factory();
-     $db_table = "rex_rexpixel";
-     $sql->setTable($db_table);
-     $sql->setWhere('id = 1');
-     $sql->setValue('opacity', $opacitywert);
-     $sql->update();
+	$sql = rex_sql::factory();
+    $db_table = "rex_rexpixel";
+    $sql->setTable($db_table);
+    $sql->setWhere('id = 1');
+    $sql->setValue('opacity', $opacitywert);
+    $sql->update();
 }
-
-
 
 
 function rexpixel($params)
