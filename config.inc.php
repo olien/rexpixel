@@ -1,4 +1,8 @@
 <?php
+
+// Pfad zum default bild
+// gewähltes bild speichern
+
 $mypage = "rexpixel";
 
 $REX['ADDON']['rxid'][$mypage] = 'xxx';
@@ -59,11 +63,14 @@ function rexpixel($params)
 	  $db_table = "rex_rexpixel";
 	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $opacity 			= $sql->getValue('opacity');
-	  $bilder 			= $sql->getValue('images');
+	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $positionlinks 	= $sql->getValue('posleft');	  
   	  $positionoben 	= $sql->getValue('postop');
 	  $zindex 			= $sql->getValue('zindex');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
+
+	 $anzahlderbilder = count($bilder);
+
 
   $output = $params['subject'];
 
@@ -83,10 +90,6 @@ function rexpixel($params)
       	 $opacity_str = 'opacity: 0.'.$opacity.';';
       }
 
-	  if ($bilder == "default.jpg") {
-		 // echo "default";
-	  }
-
 	  $css.='
 	  <style>
 		#rpsetting {
@@ -102,12 +105,14 @@ function rexpixel($params)
 	    width:100%;
 	    height:100%;
 	    z-index: -1;
-	    background: url(./files/addons/rexpixel/default.jpg) top center no-repeat;
+	
+	    background-position: top center;
+	    background-repeat: no-repeat;
 	  }
 	</style>
 		 '; 
 		  
-		
+	//     background-image: url(./files/addons/rexpixel/default.jpg); 	
 	  	$html.='<!-- REXpixel -->'.PHP_EOL;
 		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
 	    $html.='<div id="rpsetting">'.PHP_EOL;		
@@ -118,9 +123,26 @@ function rexpixel($params)
 	  	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
 		$html.='	<div class="rechts"></div> '.PHP_EOL;
 		$html.='	<div class="links">z-Index ändern</div>'.PHP_EOL;
-	  	$html.='	<input id="zcheck" type="checkbox" checked="true">'.PHP_EOL;
-	  	$html.='	<div class="titel">Lineal</div>'.PHP_EOL;
-	  	$html.='	<div class="titel">Raster</div>'.PHP_EOL;		
+	  	$html.='	<div class="rechts"><input id="zcheck" type="checkbox" checked="true"></div>'.PHP_EOL;
+
+
+if ($anzahlderbilder > 1) {
+	$html.='	<div class="links">Layoutbild</div>'.PHP_EOL;
+	$html.='	<div class="rechts">'.PHP_EOL;
+	$html.='<select name="change" id="backgrounds">'.PHP_EOL;
+
+foreach($bilder as $bild) {
+    $html.='<option>'.$bild.'</option>'.PHP_EOL;
+}
+	$html.='</select>'.PHP_EOL;
+	$html.='</div>'.PHP_EOL;
+}
+
+
+
+
+
+
 		$html.='	</div>'.PHP_EOL;	
 		$html.='</div>'.PHP_EOL;
     	$html.='<!-- /REXpixel -->'.PHP_EOL;
@@ -275,7 +297,11 @@ $scripts.='
 
 });
 
-	
+	$("#backgrounds").change(function() {
+	   var background = $(this).find("option:selected").text();
+	   $("#rexpixel").css("background-image","url(./files/"+background+")");
+  
+	});
 	
 	
 });
