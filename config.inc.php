@@ -1,9 +1,7 @@
 <?php
 
-// Pfad zum default bild
 // gewähltes Bild speichern
 // openclose speichern
-// 1. bild richtig angeben (css / pfad)
 
 $mypage = "rexpixel";
 
