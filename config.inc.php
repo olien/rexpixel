@@ -1,18 +1,22 @@
 <?php
 
 // Pfad zum default bild
-// gewähltes bild speichern
+// gewähltes Bild speichern
+// openclose speichern
+// 1. bild richtig angeben (css / pfad)
 
 $mypage = "rexpixel";
 
 $REX['ADDON']['rxid'][$mypage] = 'xxx';
 $REX['ADDON']['name'][$mypage] = 'REXpixel';
 $REX['ADDON']['page'][$mypage] = $mypage;
-$REX['ADDON']['version'][$mypage] = "0.01";
+$REX['ADDON']['version'][$mypage] = "0.05";
 $REX['ADDON']['author'][$mypage] = "Oliver Kreischer";
 $REX['ADDON']['supportpage'][$mypage] = 'forum.redaxo.de';
 $REX['ADDON']['perm'][$mypage] = $mypage . "[]";
 $REX['PERM'][] = $mypage . "[]";
+
+$startbg = '';
 
 // --- DYN
 $REX['ADDON']['dev_tools']['bild'] = '';
@@ -69,7 +73,19 @@ function rexpixel($params)
 	  $zindex 			= $sql->getValue('zindex');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
 
-	 $anzahlderbilder = count($bilder);
+$anzahlderbilder = count($bilder);
+
+
+
+if ($anzahlderbilder == 1 AND $bilder[0] == "default.jpg") {
+	$startbg = 'background-image: url(./files/addons/rexpixel/'.$bilder[0].');';
+} else {
+	$startbg = 'background-image: url(./files/'.$bilder[0].');';
+}
+
+// -image","url(./files/addons/rexpixel/"+background+")");
+
+
 
 
   $output = $params['subject'];
@@ -105,7 +121,7 @@ function rexpixel($params)
 	    width:100%;
 	    height:100%;
 	    z-index: -1;
-	
+		'.$startbg.'	
 	    background-position: top center;
 	    background-repeat: no-repeat;
 	  }
@@ -299,7 +315,12 @@ $scripts.='
 
 	$("#backgrounds").change(function() {
 	   var background = $(this).find("option:selected").text();
-	   $("#rexpixel").css("background-image","url(./files/"+background+")");
+
+	   if (background == "default.jpg") {
+	   		$("#rexpixel").css("background-image","url(./files/addons/rexpixel/"+background+")");
+	   } else {
+	   		$("#rexpixel").css("background-image","url(./files/"+background+")");
+	   }
   
 	});
 	
