@@ -180,8 +180,14 @@ foreach($bilder as $bild) {
 		// jQuery + UI nur laden wenn nicht vorher schon jQuery geladen wurde
 		$scripts.=' 
 		<script type="text/javascript">
-			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
-			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
+
+			if (!window.jQuery) {
+				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
+				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
+			}
+
+
+
 		</script>';
 		
 		$scripts.='	<script src="./files/addons/rexpixel/rexpixel.js"></script>'.PHP_EOL;
