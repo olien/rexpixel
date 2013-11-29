@@ -32,48 +32,31 @@ $aktivesbild	= rex_request('rexpixel_bildaktiv', 'string', NULL);
 
 
 $db_table = "rex_rexpixel";
-
-if ($zindex) {
 	$sql = rex_sql::factory();
 	$sql->setTable($db_table);
 	$sql->setWhere('id = 1');
+
+if ($zindex) {
 	$sql->setValue('zindex', $zindex );
-	$sql->update();
 }
 
 if ($position_left[0] <> 0) {
-   $sql = rex_sql::factory();
-   $sql->setTable($db_table);
-   $sql->setWhere('id = 1');
    $sql->setValue('posleft', $position_left);
    $sql->setValue('postop',  $position_top);	 
-   $sql->update();
 }
-
 if ($openclose <> NULL) {
-   $sql = rex_sql::factory();
-   $sql->setTable($db_table);
-   $sql->setWhere('id = 1');
    $sql->setValue('openclose', $openclose);
-   $sql->update();
 }
 
 if ($aktivesbild <> NULL) {
-   $sql = rex_sql::factory();
-   $sql->setTable($db_table);
-   $sql->setWhere('id = 1');
    $sql->setValue('aktivesbild', $aktivesbild);
-   $sql->update();
 }
 
 if ($opacitywert <> null) {
-	$sql = rex_sql::factory();
-    $sql->setTable($db_table);
-    $sql->setWhere('id = 1');
     $sql->setValue('opacity', $opacitywert);
-    $sql->update();
 }
 
+$sql->update();
 
 function rexpixel($params)
 {
