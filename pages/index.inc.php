@@ -17,15 +17,34 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       echo rex_info(rex_get('_msg', 'string'));
     }
     
-    $form = rex_form::factory("rex_rexpixel", "Einstellungen für das Tool", "id=1", 'post', false);
+    $form = rex_form::factory("rex_rexpixel", "Allgemeine Einstellungen für das Tool", "id=1", 'post', false);
+      
+      $field = &$form->addSelectField('anaus');
+      $field->setLabel("Anzeige");
+        $select = &$field->getSelect();
+         $select->setSize(1);
+         $select->addOption('Eingeschaltet','an');
+         $select->addOption('Ausgeschaltet','aus');  
+      $field->setAttribute('style','padding: 1px 0 1px 5px');             
+
+
+      $field = &$form->addSelectField('sichtbarkeit');
+      $field->setLabel("Sichtbarkeit");
+        $select = &$field->getSelect();
+         $select->setSize(1);
+         $select->addOption('Nur für im Redaxo Backend angemeldete Benutzer','eingeloggte');
+         $select->addOption('Für alle Benutzer','alle');        
+      $field->setAttribute('style','padding: 1px 0 1px 5px');          
+/*
+
       $field = &$form->addTextField('posleft');
       $field->setLabel("Position von links");
-      $field->setAttribute('style','width: 50px');
+      $field->setAttribute('style','width: 50px;');
 
       $field = &$form->addTextField('postop');
       $field->setLabel("Position von oben");
       $field->setAttribute('style','width: 50px');
-
+*/
       $form->addFieldset('Einstellungen für das/die Layoutbild/er');
 
       $field =& $form->addMedialistField('images');
@@ -39,7 +58,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
          $select->addOption('zentriert','center');
          $select->addOption('links','left');
          $select->addOption('rechts','right');        
-         $select->setAttribute('style','width: 100px');
+      $field->setAttribute('style','padding: 1px 0 1px 5px');
 
       $field = &$form->addTextField('opacity');
       $field->setLabel("Opacity");

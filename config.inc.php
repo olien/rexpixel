@@ -66,6 +66,9 @@ function rexpixel($params)
   $sql = rex_sql::factory();
 	  $db_table = "rex_rexpixel";
 	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
+
+	  $anaus			= $sql->getValue('anaus');
+	  $sichtbarkeit		= $sql->getValue('sichtbarkeit');
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $aktivesbild 		= $sql->getValue('aktivesbild');
@@ -370,11 +373,29 @@ $scripts.='
     	$scripts.='<!-- /REXpixel -->'.PHP_EOL;
   }
 
-	  $output = str_replace('</head>',$css.'</head>',$output);  
-	  $output = str_replace('</body>',$html.'</body>',$output);  
-     $output = str_replace('</head>',$scripts.'</head>',$output);
 
+
+
+		$output = str_replace('</head>',$css.'</head>',$output);  
+  		$output = str_replace('</body>',$html.'</body>',$output);  
+   		$output = str_replace('</head>',$scripts.'</head>',$output);
+  
+
+	
+
+
+  if ($anaus == "an") {
+   	if ($sichtbarkeit == "alle") {
 	  return $output;
+  	} else if(is_object($REX['LOGIN']) AND is_object($REX['LOGIN']->USER)) {
+  	  return $output;
+	}
+  } 
+		
+
+	  
+
+
 }
 
 
