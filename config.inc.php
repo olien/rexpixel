@@ -82,7 +82,7 @@ function rexpixel($params)
 	$anzahlderbilder = count($bilder);
 
 
-if ($anzahlderbilder == 1 OR $bilder[0] == "rex_pixel_default.jpg") {
+if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$bilder[0].');';
 } else if ($aktivesbild == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$aktivesbild.');';	
@@ -199,6 +199,8 @@ $scripts.='
 	
 $(function() {
 
+
+	$( "#rexpixel" ).draggable();
 	$( "#slider_opacity" ).slider({
 
 	range: "max",
