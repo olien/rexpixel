@@ -238,9 +238,8 @@ $(function() {
 			
 	    }
 	});
-	';
+';
 	
-
 if ($zindex == 'drunter') {
 
 $scripts.=' 
@@ -254,23 +253,19 @@ $scripts.='
 
 	$( "#rexpixel" ).draggable();
 
-
 	$("#zcheck").attr("checked", true);
 
 		$(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
    	        	if($(e).css("position")=="absolute")
    	            	return parseInt($(e).css("z-index"))||1 ;
-   	            })
+  	            })
    			);
    		      $("#rexpixel").css("z-index", maxZ)
    		      $("#rpsetting").css("z-index", maxZ+1)
 
-   	 	 });
-
-
+		});
 ';
-
 
 }
 	
