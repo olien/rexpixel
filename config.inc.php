@@ -184,7 +184,7 @@ foreach($bilder as $bild) {
 			if (!window.jQuery) {
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
-			}
+	}
 
 
 
@@ -251,6 +251,10 @@ $scripts.='
 } else {
 
 $scripts.='
+
+	$( "#rexpixel" ).draggable();
+
+
 	$("#zcheck").attr("checked", true);
 
 		$(function(){
