@@ -27,9 +27,9 @@ $opacitywert 	= rex_request('rexpixel_opacity', 'string', NULL);
 $position_left 	= rex_request('rexpixel_position_left', 'string', NULL);
 $position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
 $openclose 		= rex_request('rexpixel_status', 'string', NULL);
+
 $zindex 		= rex_request('rexpixel_zindex', 'string', NULL);
 $aktivesbild	= rex_request('rexpixel_bildaktiv', 'string', NULL);
-
 
 $db_table = "rex_rexpixel";
 	$sql = rex_sql::factory();
@@ -58,6 +58,11 @@ if ($opacitywert <> null) {
 
 $sql->update();
 
+
+
+
+
+
 function rexpixel($params)
 {
   global $REX;
@@ -72,6 +77,7 @@ function rexpixel($params)
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $aktivesbild 		= $sql->getValue('aktivesbild');
+ 	  $aktivesbildhoehe	= $sql->getValue('aktivesbildhoehe');  	  	  
   	  $positionlinks 	= $sql->getValue('posleft');	  
   	  $positionoben 	= $sql->getValue('postop');
 	  $openclose	 	= $sql->getValue('openclose');  
@@ -80,7 +86,6 @@ function rexpixel($params)
 
 
 	$anzahlderbilder = count($bilder);
-
 
 if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$bilder[0].');';
@@ -101,6 +106,15 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
   if (!$REX['REDAXO'])
   {
 
+  	if ($aktivesbild != 'rex_pixel_default.jpg') {
+	$imagepath = './files/'.$aktivesbild;
+   	list($width, $height, $type, $attr) = getimagesize($imagepath);
+   		$aktivesbildhoehe = $height;
+   } else {
+   	 	$aktivesbildhoehe = '768';
+   }
+
+
 	  if ($opacity == 0) {
 		 $opacity_str = 'opacity: 0;';
 	  } else if ($opacity < 10) {
@@ -120,11 +134,11 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 		}
 
 	  #rexpixel {
-	    position:fixed;
+	    position: absolute;
 		top: 0;
 	    '.$opacity_str.'
 	    width:100%;
-	    height:100%;
+	    min-height: '.$aktivesbildhoehe.'px;
 	    z-index: -1;
 		'.$startbg.'
 	    background-position: top '.$layoutposition.';
@@ -350,8 +364,13 @@ $scripts.='
 	   		$("#rexpixel").css("background-image","url(./files/addons/rexpixel/"+background+")");
 	   } else {
 	   		$("#rexpixel").css("background-image","url(./files/"+background+")");
+
+			var img = new Image();
+			img.src = "./files/"+background;
+	   		$("#rexpixel").css("min-height", img.height );
+
 	   }
-  
+
 		$.ajax({
 			type: "POST",
 			url: "index.php?rexpixel_bildaktiv="+background,
