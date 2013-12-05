@@ -170,9 +170,9 @@ foreach($bilder as $bild) {
 
 foreach($bilder as $bild) : 
 	if ($bild == "rex_pixel_default.jpg") {
-	$html.=  '<img src="./files/addons/rexpixel/'.$bild.'" width="0" >';
+	$html.=  '<img src="./files/addons/rexpixel/'.$bild.'" width="20" >';
 	} else {
-	$html.=  '<img src="./files/'.$bild.'" width="0" height="0">';	
+	$html.=  '<img src="./files/'.$bild.'" width="20" height="20">';	
 	}
 
 endforeach;
@@ -307,9 +307,6 @@ $scripts.='
 
          $("#rexpixel").css("z-index", "-1")
 	         z = "drunter";
-
- 		
-	
 		}
 
 		$.ajax({
@@ -358,7 +355,6 @@ $scripts.='
 
 	   if (background == "rex_pixel_default.jpg") {
 	   		$("#rexpixel").css("background-image","url(./files/addons/rexpixel/"+background+")");
-	      	$("#rexpixel").css("min-height", "768px" );
 
 	   } else {
 	        
@@ -366,13 +362,9 @@ $scripts.='
 					img.src = "./files/"+background;
 		            $("#rexpixel").css("min-height", img.height );
 			   		$("#rexpixel").css("background-image","url(./files/"+background+")");
-			
-
-
-
 	   }
 
-	
+	alert(img.height);	
 
 
 
