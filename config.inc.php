@@ -111,6 +111,7 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 		}
 
 	  #rexpixel {
+	  	display: inline-block;
 	    position: absolute;
 		top: 0;
 	    '.$opacity_str.'
@@ -129,6 +130,8 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
 	$html.='	<div id="rpcontent">'.PHP_EOL;	
 	$html.='	<div class="titel">Layout Vorlage</div>'.PHP_EOL;
+	$html.='	<div class="links">deaktivieren</div>'.PHP_EOL;
+	$html.='	<div class="rechts"><input id="deaktivieren" type="checkbox"></div>'.PHP_EOL;	
 	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
 	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
 	$html.='	<div class="rechts"></div> '.PHP_EOL;
@@ -231,7 +234,7 @@ if ($zindex == 'drunter') {
 
 $scripts.=' 
 	$("#zcheck").attr("checked", false);
-	 $("#rexpixel").css("z-index", "-1")
+	$("#rexpixel").css("z-index", "-1")
 ';
 
 } else {
@@ -258,6 +261,13 @@ $scripts.='
 	
 $scripts.='
 
+	$("#deaktivieren").change(function() {
+	   if(this.checked) {
+			    $("#rexpixel").css("display", "none")
+		    } else {
+			    $("#rexpixel").css("display", "inline-block")
+			}
+	});
 
 	$("#zcheck").change(function() {
 	   
