@@ -15,20 +15,17 @@ $REX['PERM'][] = $mypage . "[]";
 
 $startbg = '';
 
-// --- DYN
 $REX['ADDON']['dev_tools']['bild'] = '';
-// --- /DYN
 
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
-// Gucken ob mit der URL eine var mitgegeben wurde und dann auswerten
-$opacitywert 	= rex_request('rexpixel_opacity', 'string', NULL);
-$position_left 	= rex_request('rexpixel_position_left', 'string', NULL);
-$position_top 	= rex_request('rexpixel_position_top', 'string', NULL);
-$openclose 		= rex_request('rexpixel_status', 'string', NULL);
-
-$zindex 		= rex_request('rexpixel_zindex', 'string', NULL);
-$aktivesbild	= rex_request('rexpixel_bildaktiv', 'string', NULL);
+$opacitywert 		= rex_request('rexpixel_opacity', 'string', NULL);
+$position_left 		= rex_request('rexpixel_position_left', 'string', NULL);
+$position_top 		= rex_request('rexpixel_position_top', 'string', NULL);
+$openclose 			= rex_request('rexpixel_status', 'string', NULL);
+$zindex 			= rex_request('rexpixel_zindex', 'string', NULL);
+$aktivesbild		= rex_request('rexpixel_bildaktiv', 'string', NULL);
+$aktivesbildhoehe	= rex_request('rexpixel_height', 'string', NULL);
 
 $db_table = "rex_rexpixel";
 	$sql = rex_sql::factory();
@@ -49,6 +46,7 @@ if ($openclose <> NULL) {
 
 if ($aktivesbild <> NULL) {
    $sql->setValue('aktivesbild', $aktivesbild);
+   $sql->setValue('aktivesbildhoehe', $aktivesbildhoehe);   
 }
 
 if ($opacitywert <> null) {
@@ -60,23 +58,20 @@ $sql->update();
 function rexpixel($params)
 {
   global $REX;
-
-  // Werte holen
   $sql = rex_sql::factory();
-	  $db_table = "rex_rexpixel";
-	  $sql->setQuery("SELECT * FROM $db_table WHERE id=1");
-
+	$db_table = "rex_rexpixel";
+	$sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $anaus			= $sql->getValue('anaus');
 	  $sichtbarkeit		= $sql->getValue('sichtbarkeit');
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $aktivesbild 		= $sql->getValue('aktivesbild');
+	  $aktivesbildhoehe	= $sql->getValue('aktivesbildhoehe');  	  
   	  $positionlinks 	= $sql->getValue('posleft');	  
   	  $positionoben 	= $sql->getValue('postop');
 	  $openclose	 	= $sql->getValue('openclose');  
 	  $zindex 			= $sql->getValue('zindex');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
-
 
 	$anzahlderbilder = count($bilder);
 
@@ -90,15 +85,14 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/'.$bilder[0].');';
 }
 
-
   $output = $params['subject'];
 
   $scripts = PHP_EOL;
-  $html = PHP_EOL;  
-  $css = PHP_EOL;    
+  $html    = PHP_EOL;  
+  $css 	   = PHP_EOL;    
+
   if (!$REX['REDAXO'])
   {
-
 	  if ($opacity == 0) {
 		 $opacity_str = 'opacity: 0;';
 	  } else if ($opacity < 10) {
@@ -109,7 +103,7 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
       	 $opacity_str = 'opacity: 0.'.$opacity.';';
       }
 
-	  $css.='
+	$css.='
 	  <style>
 		#rpsetting {
 		   position: absolute;
@@ -122,86 +116,68 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 		top: 0;
 	    '.$opacity_str.'
 	    width:100%;
-	    min-height: 100%;
+	    min-height: '.$aktivesbildhoehe.'px;
 	    z-index: -1;
 		'.$startbg.'
 	    background-position: top '.$layoutposition.';
 	    background-repeat: no-repeat;
 	  }
-
-		 '; 
+	'; 
 		  
-	//     background-image: url(./files/addons/rexpixel/rex_pixel_default.jpg); 	
-	  	$html.='<!-- REXpixel -->'.PHP_EOL;
-		$html.='<div id="rexpixel"></div>'.PHP_EOL;		
-	    $html.='<div id="rpsetting">'.PHP_EOL;		
-	  	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
-		$html.='	<div id="rpcontent">'.PHP_EOL;	
-	  	$html.='	<div class="titel">Layout Vorlage</div>'.PHP_EOL;
-	  	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
-	  	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
-		$html.='	<div class="rechts"></div> '.PHP_EOL;
-		$html.='	<div class="links">z-Index ändern</div>'.PHP_EOL;
-	  	$html.='	<div class="rechts"><input id="zcheck" type="checkbox" checked="true"></div>'.PHP_EOL;
-
-
+	$html.='<!-- REXpixel -->'.PHP_EOL;
+	$html.='<div id="rexpixel"></div>'.PHP_EOL;		
+	$html.='<div id="rpsetting">'.PHP_EOL;		
+	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
+	$html.='	<div id="rpcontent">'.PHP_EOL;	
+	$html.='	<div class="titel">Layout Vorlage</div>'.PHP_EOL;
+	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
+	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
+	$html.='	<div class="rechts"></div> '.PHP_EOL;
+	$html.='	<div class="links">z-Index ändern</div>'.PHP_EOL;
+	$html.='	<div class="rechts"><input id="zcheck" type="checkbox" checked="true"></div>'.PHP_EOL;
 
 if ($anzahlderbilder > 1) {
 	$html.='	<div class="links">Layoutbild</div>'.PHP_EOL;
 	$html.='	<div class="rechts">'.PHP_EOL;
-	$html.='<select name="change" id="backgrounds">'.PHP_EOL;
+	$html.='	<select name="change" id="backgrounds">'.PHP_EOL;
 
-foreach($bilder as $bild) {
+	foreach($bilder as $bild) {
+		if ($bild == "rex_pixel_default.jpg") {
+			$pfad = "./files/addons/rexpixel/";
+		} else {
+			$pfad = "./files/";
+		}
 
-	if ($aktivesbild == $bild) {
-		$html.='<option selected>'.$bild.'</option>'.PHP_EOL;
-	} else {
-		$html.='<option>'.$bild.'</option>'.PHP_EOL;	
+		if ($aktivesbild == $bild) {
+			$html.='<option data-image="'.$pfad.$bild.'" data-description="Hier der Bildtitel" selected>'.$bild.'</option>'.PHP_EOL;
+		} else {
+			$html.='<option data-image="'.$pfad.$bild.'" data-description="Hier der Bildtitel" >'.$bild.'</option>'.PHP_EOL;	
+		}
 	}
 
-    
-}
-
-	$css.='	</style>';
 
 	$html.='</select>'.PHP_EOL;
-
-
-
-foreach($bilder as $bild) : 
-	if ($bild == "rex_pixel_default.jpg") {
-	$html.=  '<img src="./files/addons/rexpixel/'.$bild.'" width="20" >';
-	} else {
-	$html.=  '<img src="./files/'.$bild.'" width="20" height="20">';	
-	}
-
-endforeach;
-
-
-
-
-
 	$html.='</div>'.PHP_EOL;
 }
+	$css.='	</style>';
 
-		$html.='	</div>'.PHP_EOL;	
-		$html.='</div>'.PHP_EOL;
-    	$html.='<!-- /REXpixel -->'.PHP_EOL;
+	$html.='	</div>'.PHP_EOL;	
+	$html.='</div>'.PHP_EOL;
+   	$html.='<!-- /REXpixel -->'.PHP_EOL;
 
-    	$scripts.='<!-- REXpixel -->'.PHP_EOL;
+   	$scripts.='<!-- REXpixel h -->'.PHP_EOL;
 
-		// jQuery + UI nur laden wenn nicht vorher schon jQuery geladen wurde
-		$scripts.=' 
+	$scripts.=' 
 		<script type="text/javascript">
-
 			if (!window.jQuery) {
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
 			}
-
 		</script>';
-		
-		$scripts.='	<script src="./files/addons/rexpixel/rexpixel.js"></script>'.PHP_EOL;
+
+if ($anzahlderbilder > 1) {
+		$scripts.='	<script src="./files/addons/rexpixel/jquery.dd.min.js"></script>'.PHP_EOL;
+}
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
 		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dark-hive/jquery-ui.css" />'.PHP_EOL;		
 		
@@ -211,8 +187,8 @@ $scripts.='
 $(function() {
 
 	$( "#rexpixel" ).draggable();
-	$( "#slider_opacity" ).slider({
 
+	$( "#slider_opacity" ).slider({
 	range: "max",
 	min: 0,
 	max: 100,
@@ -350,33 +326,31 @@ $scripts.='
 
 });
 
+';
+if ($anzahlderbilder > 1) {
+$scripts.=' var oHandler1 = $("#backgrounds").msDropdown().data("dd");';
+}
+
+$scripts.='
 	$("#backgrounds").change(function() {
 	   var background = $(this).find("option:selected").text();
 
 	   if (background == "rex_pixel_default.jpg") {
 	   		$("#rexpixel").css("background-image","url(./files/addons/rexpixel/"+background+")");
-
+			hoehe = "768";
 	   } else {
-	        
 					var img = new Image();
 					img.src = "./files/"+background;
 		            $("#rexpixel").css("min-height", img.height );
 			   		$("#rexpixel").css("background-image","url(./files/"+background+")");
+					hoehe = img.height;
 	   }
-
-	alert(img.height);	
-
-
-
 		$.ajax({
 			type: "POST",
-			url: "index.php?rexpixel_bildaktiv="+background,
+			url: "index.php?rexpixel_bildaktiv="+background+"&rexpixel_height="+hoehe,
 			async: true
    		   });
-
 	});
-
-
 ';
 
  if ($aktivesbild == null) {
@@ -384,28 +358,16 @@ $scripts.='
  }
 
 $scripts.='
-
-
-	
 	
 });
 </script>
 ';
-
-		
     	$scripts.='<!-- /REXpixel -->'.PHP_EOL;
   }
 
-
-
-
 		$output = str_replace('</head>',$css.'</head>',$output);  
   		$output = str_replace('</body>',$html.'</body>',$output);  
-   		$output = str_replace('</head>',$scripts.'</head>',$output);
-  
-
-	
-
+ 		$output = str_replace('</head>',$scripts.'</head>',$output);
 
   if ($anaus == "an") {
    	if ($sichtbarkeit == "alle") {
@@ -414,10 +376,6 @@ $scripts.='
   	  return $output;
 	}
   } 
-		
-
-	  
-
 
 }
 
