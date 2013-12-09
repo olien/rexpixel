@@ -15,7 +15,7 @@ ToDo
 Hinweise
 --------
 
-* Getestet mit REDAXO 4.5
+* Getestet mit REDAXO 4.5 / 4.5.1
 * Addon-Ordner lautet: `rexpixel`
 
 Changelog

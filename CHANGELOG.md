@@ -6,7 +6,7 @@ REXpixel - Changelog
 * Fehler behoben
 * Sticky Position eingebaut
 * Sticky Position wieder ausgebaut. Tool ist jetzt verschiebbar und Sticky
-
+* z-Index Fehler behoben
 
 ### Version 0.2 - 07. Dezember 2013 
 
