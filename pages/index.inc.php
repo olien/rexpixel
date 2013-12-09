@@ -37,14 +37,6 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
          $select->addOption('Für alle Benutzer','alle');        
       $field->setAttribute('style','padding: 1px 0 1px 5px');   
 
-    
-      $field = &$form->addSelectField('postool');
-      $field->setLabel("Position");
-        $select = &$field->getSelect();
-         $select->setSize(1);
-         $select->addOption('Verschiebbar','move');
-         $select->addOption('Sticky','sticky');        
-      $field->setAttribute('style','padding: 1px 0 1px 5px'); 
 
 /*
 

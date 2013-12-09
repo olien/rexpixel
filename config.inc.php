@@ -62,7 +62,6 @@ function rexpixel($params)
 	$sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $anaus			= $sql->getValue('anaus');
 	  $sichtbarkeit		= $sql->getValue('sichtbarkeit');
-	  $postool			= $sql->getValue('postool');
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $aktivesbild 		= $sql->getValue('aktivesbild');
@@ -104,29 +103,12 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
       }
 
 	$css.='
-	  <style>';
+	<style>
 
-
-if ($postool == "move") {
-	$css.='
 	#rpsetting {
-	   position: absolute;
 	   top: '.$positionoben.'px;
 	   left: '.$positionlinks.'px;
 	}
-	';
-} else {
-	$css.='
-	#rpsetting {
-	   position:fixed !important;
-	   top: 5px;
-	   right: 5px;
-	}
-	';
-}
-
-$css.='
-
 
 	  #rexpixel {
 	  	display: inline-block;
@@ -229,10 +211,11 @@ $(function() {
         } }
 	});
 
-';
+var pos = $("#rpsetting").offset();
+console.log(pos.left)
+console.log(pos.top)
 
-if ($postool == "move") {
-$scripts.=' $( "#rexpixel" ).draggable();
+$( "#rexpixel" ).draggable();
 	
 	$( "#rpsetting" ).draggable({ handle: "#rpheader",
 	    stop: function(event, ui) {
@@ -250,7 +233,6 @@ $scripts.=' $( "#rexpixel" ).draggable();
 	    }
 	});
 ';
-}
 
 	
 if ($zindex == 'drunter') {
