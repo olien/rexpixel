@@ -1,6 +1,12 @@
 REXpixel - Changelog
 ============================
 
+### Version 0.2 - 09. Dezember 2013 
+
+* Fehler behoben
+* Sticky Position eingebaut
+
+
 ### Version 0.2 - 07. Dezember 2013 
 
 * 07.12.2013 ms-Dropdown eingebaut ( http://www.marghoobsuleman.com/jquery-image-dropdown )
