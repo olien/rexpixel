@@ -381,7 +381,7 @@ $scripts.='
   if ($anaus == "an") {
    	if ($sichtbarkeit == "alle") {
 	  return $output;
-  	} else if(is_object($REX['LOGIN']) AND is_object($REX['LOGIN']->USER)) {
+  	} else if (isset($_SESSION[$REX['INSTNAME']]['UID'])) {
   	  return $output;
 	}
   } 
