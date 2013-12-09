@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS rex_rexpixel (
   `id` 				         int(10) unsigned NOT NULL auto_increment,
   `anaus`              text default NULL,
   `sichtbarkeit`       text default NULL,  
+  `postool`            varchar(255) default NULL,     
   `images` 			       text default NULL,
   `aktivesbild`        varchar(255) default NULL,  
   `aktivesbildhoehe`   varchar(255) default NULL,  
@@ -18,4 +19,4 @@ CREATE TABLE IF NOT EXISTS rex_rexpixel (
 ) ENGINE=MyISAM;
 
 INSERT INTO rex_rexpixel
-VALUES (1,'an','eingeloggte','rex_pixel_default.jpg','rex_pixel_default.jpg','768','50','10','10','open','drunter','center');
+VALUES (1,'an','eingeloggte','move','rex_pixel_default.jpg','rex_pixel_default.jpg','768','50','10','10','open','drunter','center');

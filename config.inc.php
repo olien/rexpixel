@@ -62,6 +62,7 @@ function rexpixel($params)
 	$sql->setQuery("SELECT * FROM $db_table WHERE id=1");
 	  $anaus			= $sql->getValue('anaus');
 	  $sichtbarkeit		= $sql->getValue('sichtbarkeit');
+	  $postool			= $sql->getValue('postool');
 	  $opacity 			= $sql->getValue('opacity');
 	  $bilder 			= explode(',', $sql->getValue('images'));
   	  $aktivesbild 		= $sql->getValue('aktivesbild');
@@ -103,12 +104,29 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
       }
 
 	$css.='
-	  <style>
-		#rpsetting {
-		   position: absolute;
-		   top: '.$positionoben.'px;
-		   left: '.$positionlinks.'px;
-		}
+	  <style>';
+
+
+if ($postool == "move") {
+	$css.='
+	#rpsetting {
+	   position: absolute;
+	   top: '.$positionoben.'px;
+	   left: '.$positionlinks.'px;
+	}
+	';
+} else {
+	$css.='
+	#rpsetting {
+	   position:fixed !important;
+	   top: 5px;
+	   right: 5px;
+	}
+	';
+}
+
+$css.='
+
 
 	  #rexpixel {
 	  	display: inline-block;
@@ -188,8 +206,6 @@ $scripts.='
 	
 $(function() {
 
-	$( "#rexpixel" ).draggable();
-
 	$( "#slider_opacity" ).slider({
 	range: "max",
 	min: 0,
@@ -212,6 +228,11 @@ $(function() {
    			    });
         } }
 	});
+
+';
+
+if ($postool == "move") {
+$scripts.=' $( "#rexpixel" ).draggable();
 	
 	$( "#rpsetting" ).draggable({ handle: "#rpheader",
 	    stop: function(event, ui) {
@@ -229,6 +250,8 @@ $(function() {
 	    }
 	});
 ';
+}
+
 	
 if ($zindex == 'drunter') {
 

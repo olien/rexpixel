@@ -18,6 +18,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
     }
     
     $form = rex_form::factory("rex_rexpixel", "Allgemeine Einstellungen für das Tool", "id=1", 'post', false);
+      $field =& $form->addRawField('<br/>&nbsp;<br/>');
       
       $field = &$form->addSelectField('anaus');
       $field->setLabel("Anzeige");
@@ -34,7 +35,17 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
          $select->setSize(1);
          $select->addOption('Nur für im Redaxo Backend angemeldete Benutzer','eingeloggte');
          $select->addOption('Für alle Benutzer','alle');        
-      $field->setAttribute('style','padding: 1px 0 1px 5px');          
+      $field->setAttribute('style','padding: 1px 0 1px 5px');   
+
+    
+      $field = &$form->addSelectField('postool');
+      $field->setLabel("Position");
+        $select = &$field->getSelect();
+         $select->setSize(1);
+         $select->addOption('Verschiebbar','move');
+         $select->addOption('Sticky','sticky');        
+      $field->setAttribute('style','padding: 1px 0 1px 5px'); 
+
 /*
 
       $field = &$form->addTextField('posleft');
@@ -45,7 +56,10 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       $field->setLabel("Position von oben");
       $field->setAttribute('style','width: 50px');
 */
+
+      $field =& $form->addRawField('<br/>&nbsp;<br/>&nbsp;<br/>');
       $form->addFieldset('Einstellungen für das/die Layoutbild/er');
+      $field =& $form->addRawField('<br/>&nbsp;<br/>');
 
       $field =& $form->addMedialistField('images');
       $field->setLabel("Layoutbilder");
@@ -64,7 +78,9 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       $field->setLabel("Opacity");
       $field->setAttribute('style','width: 50px');
       
+      $field =& $form->addRawField('<br/>&nbsp;<br/>&nbsp;<br/>');      
       $form->show();
+
 ?>
 </div>
 
