@@ -117,7 +117,6 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	    '.$opacity_str.'
 	    width:100%;
 	    min-height: '.$aktivesbildhoehe.'px;
-	    z-index: -1;
 		'.$startbg.'
 	    background-position: top '.$layoutposition.';
 	    background-repeat: no-repeat;
@@ -211,9 +210,6 @@ $(function() {
         } }
 	});
 
-var pos = $("#rpsetting").offset();
-console.log(pos.left)
-console.log(pos.top)
 
 $( "#rexpixel" ).draggable();
 	
@@ -250,6 +246,8 @@ $scripts.='
 
 	$("#zcheck").attr("checked", true);
 
+
+
 		$(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
    	        	if($(e).css("position")=="absolute")
@@ -276,13 +274,17 @@ $scripts.='
 
 	$("#zcheck").change(function() {
 	   
+
+
 	    if(this.checked) {
 	
 		z = "drueber";
 
+	
+
    		 $(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
-   	        	if($(e).css("position")=="absolute")
+   	        	if($(e).css("position")=="fixed")
    	            	return parseInt($(e).css("z-index"))||1 ;
    	            })
    			);

@@ -18,4 +18,4 @@ CREATE TABLE IF NOT EXISTS rex_rexpixel (
 ) ENGINE=MyISAM;
 
 INSERT INTO rex_rexpixel
-VALUES (1,'an','eingeloggte','rex_pixel_default.jpg','rex_pixel_default.jpg','768','50','10','10','open','drunter','center');
+VALUES (1,'an','eingeloggte','rex_pixel_default.jpg','rex_pixel_default.jpg','768','50','10','10','open','drueber','center');
