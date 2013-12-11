@@ -171,7 +171,7 @@ if ($anzahlderbilder > 1) {
 	$scripts.=' 
 		<script type="text/javascript">
 			if (!window.jQuery) {
-				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">\x3C/script>");
+				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\">\x3C/script>");
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
 			}
 		</script>';
@@ -383,7 +383,7 @@ $scripts.='
 
 		$output = str_replace('</head>',$css.'</head>',$output);  
   		$output = str_replace('</body>',$html.'</body>',$output);  
- 		$output = str_replace('</head>',$scripts.'</head>',$output);
+ 		$output = str_replace('</body>',$scripts.'</body>',$output);
 
   if ($anaus == "an") {
    	if ($sichtbarkeit == "alle") {
