@@ -172,8 +172,9 @@ if ($anzahlderbilder > 1) {
 		<script type="text/javascript">
 			if (!window.jQuery) {
 				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\">\x3C/script>");
-				document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
+
 			}
+			document.write("<script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js\">\x3C/script>");
 		</script>';
 
 if ($anzahlderbilder > 1) {
