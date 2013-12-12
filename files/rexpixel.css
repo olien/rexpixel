@@ -3,7 +3,6 @@
   position: fixed;
   width: 270px;
 
-
 	font-weight: 400;
 
 	color: grey;
@@ -19,7 +18,7 @@
   	opacity: 0.8;
  	border: 2px solid grey;
 
-  	background:  url("rp_back.jpg") top center no-repeat;
+  	background: #CECECE;
 }
   
   
@@ -28,13 +27,14 @@
 }
 
 #rpheader {
+	font-family: verdana;
 	color: grey;
 	float: left;
 	font-weight: 500;
 	width: 250px;
 	line-height: 1;
-	font-size: 14px;
-	padding: 8px 8px 6px 8px;
+	font-size: 12px;
+	padding: 8px;
 }
 
 

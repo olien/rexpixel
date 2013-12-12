@@ -152,8 +152,8 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$html.='	<div class="rechts"><input id="zcheck" type="checkbox" checked="true"></div>'.PHP_EOL;
 
 if ($anzahlderbilder > 1) {
-	$html.='	<div class="links">Layoutbild</div>'.PHP_EOL;
-	$html.='	<div class="rechts">'.PHP_EOL;
+	$html.='	<div>Layoutbild</div>'.PHP_EOL;
+	$html.='	<div>'.PHP_EOL;
 	$html.='	<select name="change" id="backgrounds">'.PHP_EOL;
 
 	foreach($bilder as $bild) {
