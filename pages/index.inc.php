@@ -21,7 +21,7 @@ rex_title($REX['ADDON']['name'][$page].' <span class="addonversion">'.$REX['ADDO
       $field =& $form->addRawField('<br/>&nbsp;<br/>');
       
       $field = &$form->addSelectField('anaus');
-      $field->setLabel("Anzeige");
+      $field->setLabel("REXpixel anzeigen");
         $select = &$field->getSelect();
          $select->setSize(1);
          $select->addOption('Eingeschaltet','an');

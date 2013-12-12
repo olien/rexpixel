@@ -18,6 +18,7 @@ $REX['ADDON']['dev_tools']['bild'] = '';
 
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
+$layeraktiv 		= rex_request('rexpixel_layeraktiv', 'string', NULL);
 $opacitywert 		= rex_request('rexpixel_opacity', 'string', NULL);
 $position_left 		= rex_request('rexpixel_position_left', 'string', NULL);
 $position_top 		= rex_request('rexpixel_position_top', 'string', NULL);
@@ -52,6 +53,10 @@ if ($opacitywert <> null) {
     $sql->setValue('opacity', $opacitywert);
 }
 
+if ($layeraktiv <> null) {
+    $sql->setValue('layeraktiv', $layeraktiv);
+}
+
 $sql->update();
 
 function rexpixel($params)
@@ -70,6 +75,7 @@ function rexpixel($params)
   	  $positionoben 	= $sql->getValue('postop');
 	  $openclose	 	= $sql->getValue('openclose');  
 	  $zindex 			= $sql->getValue('zindex');
+	  $bildlayeraktiv	= $sql->getValue('layeraktiv');
 	  $layoutposition 	= $sql->getValue('layoutpos');	  
 
 	$anzahlderbilder = count($bilder);
@@ -92,6 +98,14 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 
   if (!$REX['REDAXO'])
   {
+	
+	  if ($bildlayeraktiv == 'aktiv') {
+		 $bildlayerdisplay = 'inline-block';
+	  } else {
+		$bildlayerdisplay = 'none';
+	  }
+
+
 	  if ($opacity == 0) {
 		 $opacity_str = 'opacity: 0;';
 	  } else if ($opacity < 10) {
@@ -111,7 +125,7 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	}
 
 	  #rexpixel {
-	  	display: inline-block;
+	  	display: '.$bildlayerdisplay.';
 	    position: absolute;
 		top: 0;
 	    '.$opacity_str.'
@@ -267,9 +281,20 @@ $scripts.='
 
 	$("#deaktivieren").change(function() {
 	   if(this.checked) {
-			    $("#rexpixel").css("display", "none")
+			    $("#rexpixel").css("display", "none");
+
+				$.ajax({
+					type: "POST",
+					url:	 "index.php?rexpixel_layeraktiv=inaktiv",
+					async: true
+				});
 		    } else {
 			    $("#rexpixel").css("display", "inline-block")
+				$.ajax({
+					type: "POST",
+					url:	 "index.php?rexpixel_layeraktiv=aktiv",
+					async: true
+				});
 			}
 	});
 
