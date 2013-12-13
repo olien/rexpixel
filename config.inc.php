@@ -118,8 +118,6 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 
 	$css.='
 	<style>
-
-	
 	#rpsetting {
 	   top: '.$positionoben.'px;
 	   left: '.$positionlinks.'px;
@@ -143,14 +141,16 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$html.='<div id="rpsetting">'.PHP_EOL;		
 	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
 	$html.='	<div id="rpcontent">'.PHP_EOL;	
-
-	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
-	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
-
-	$html.='	<div><input id="deaktivieren" type="checkbox"><label for="deaktivieren">Layer deaktivieren</label></div>'.PHP_EOL;	
-	$html.='	<div class="rechts"></div> '.PHP_EOL;
-	$html.='	<div><input type="checkbox" class="checkbox" id="zcheck"><label for="zcheck">Höchster z-Index </label></div>'.PHP_EOL;
-
+	$html.='	<div class="rexpixel_wrapper">'.PHP_EOL;
+	$html.='	<div id="slider_opacity" class="links"></div>'.PHP_EOL;
+	$html.='	<div class="rechts"><span id="opacity_wert" >'.$opacity.'</span>% Deckkraft</div>'.PHP_EOL;
+	$html.='	</div>'.PHP_EOL;
+	$html.='	<div class="rexpixel_wrapper">'.PHP_EOL;
+	$html.='	<div class="links"><input id="deaktivieren" type="checkbox"></div><div class="rechts"><label for="deaktivieren">Layer deaktivieren</label></div>'.PHP_EOL;	
+	$html.='	</div>'.PHP_EOL;
+	$html.='	<div class="rexpixel_wrapper">'.PHP_EOL;
+	$html.='	<div class="links"><input type="checkbox" class="checkbox" id="zcheck"></div><div class="rechts"><label for="zcheck">Höchster z-Index </label></div>'.PHP_EOL;
+	$html.='	</div>'.PHP_EOL;
 if ($anzahlderbilder > 1) {
 	$html.='	<div>'.PHP_EOL;
 	$html.='	<select name="change" id="backgrounds">'.PHP_EOL;
@@ -158,14 +158,17 @@ if ($anzahlderbilder > 1) {
 	foreach($bilder as $bild) {
 		if ($bild == "rex_pixel_default.jpg") {
 			$pfad = "./files/addons/rexpixel/";
+			$titel = "REXpixel default";
 		} else {
 			$pfad = "./files/";
+	  		$media = OOMedia::getMediaByName($bild);
+   			$titel = $media->getTitle(); 
 		}
 
 		if ($aktivesbild == $bild) {
-			$html.='<option data-image="'.$pfad.$bild.'" data-description="Hier der Bildtitel" selected>'.$bild.'</option>'.PHP_EOL;
+			$html.='<option data-image="'.$pfad.$bild.'" data-description="'.$titel.'" selected>'.$bild.'</option>'.PHP_EOL;
 		} else {
-			$html.='<option data-image="'.$pfad.$bild.'" data-description="Hier der Bildtitel" >'.$bild.'</option>'.PHP_EOL;	
+			$html.='<option data-image="'.$pfad.$bild.'" data-description="'.$titel.'" >'.$bild.'</option>'.PHP_EOL;	
 		}
 	}
 
@@ -194,7 +197,6 @@ if ($anzahlderbilder > 1) {
 		$scripts.='	<script src="./files/addons/rexpixel/jquery.dd.min.js"></script>'.PHP_EOL;
 }
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
-		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/smoothness/jquery-ui.css" />'.PHP_EOL;		
 		
 $scripts.='
 <script>
@@ -259,9 +261,6 @@ $scripts.='
 	$( "#rexpixel" ).draggable();
 
 	$("#zcheck").attr("checked", true);
-
-
-
 		$(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
    	        	if($(e).css("position")=="absolute")
@@ -298,14 +297,10 @@ $scripts.='
 	});
 
 	$("#zcheck").change(function() {
-	   
-
 
 	    if(this.checked) {
 	
 		z = "drueber";
-
-	
 
    		 $(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
