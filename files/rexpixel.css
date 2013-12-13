@@ -1,14 +1,16 @@
 
 #rpsetting {
-  position: fixed;
-  width: 270px;
+  	font-family: verdana;
+	font-size: 12px;
+	line-height: 1;
 
-	font-weight: 400;
+  	position: fixed;
+  	width: 270px;
 
 	color: grey;
-	-webkit-box-shadow: -1px -1px 10px rgba(50, 50, 50, 0.75);
- 	-moz-box-shadow:    -1px -1px 10px rgba(50, 50, 50, 0.75);
- 	box-shadow:         -1px -1px 10px rgba(50, 50, 50, 0.75);
+	-webkit-box-shadow: -1px -1px 10px rgba(50, 50, 50, 0.40);
+ 	-moz-box-shadow:    -1px -1px 10px rgba(50, 50, 50, 0.40);
+ 	box-shadow:         -1px -1px 10px rgba(50, 50, 50, 0.40);
   
  	-moz-border-radius: 5px;
   	-webkit-border-radius: 5px;
@@ -16,9 +18,9 @@
   	border-radius: 5px; 
   
   	opacity: 0.8;
- 	border: 2px solid grey;
+ 	border: 2px solid #999;
 
-  	background: #CECECE;
+  	background: #ECECEC;
 }
   
   
@@ -27,13 +29,10 @@
 }
 
 #rpheader {
-	font-family: verdana;
 	color: grey;
 	float: left;
 	font-weight: 500;
 	width: 250px;
-	line-height: 1;
-	font-size: 12px;
 	padding: 8px;
 }
 
@@ -42,7 +41,6 @@
 	color: grey;
 	font-size: 14px;
 	float: right;
-
 }
 
 #rpheader:hover {
@@ -57,22 +55,17 @@
 
 #rpcontent {
 	clear: both;
-	margin: 5px 0 0 0;
-	padding: 0 8px 6px 8px;
+	display: inline-block;
+	margin: 0 0 5px 0;
+	padding: 20px 8px 6px 8px;
 	border-top: 1px ridge grey;
 }
 
 
+
+
 #rpcontent.close {
 	display: none;
-}
-
-.titel {
-	width: 100%;
-	float: left;
-	font-size: 10px;	
-	color: grey;
-	margin: 8px 0 8px 0;
 }
 
 .links {
@@ -92,12 +85,6 @@
 	float: left;
 	width: 150px;
 }
-
-
-input[type="checkbox"] {
-	border: 1px solid grey;
-}
-
 
 .borderRadius{-moz-border-radius:5px; border-radius:5px; }
 .borderRadiusTp{-moz-border-radius:5px 5px 0 0; border-radius:5px 5px 0 0;}
@@ -163,4 +150,3 @@ img.fnone{float:none !important; ; width: 40px; }
 .dd .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
 .dd .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
 .dd .ddChild li.selected{background-color:#d5d5d5; color:#000;}
-

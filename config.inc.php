@@ -118,7 +118,6 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 
 	$css.='
 	<style>
-
 	#rpsetting {
 	   top: '.$positionoben.'px;
 	   left: '.$positionlinks.'px;
@@ -142,17 +141,15 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$html.='<div id="rpsetting">'.PHP_EOL;		
 	$html.='	<div id="rpheader">REXpixel<div id="openclose">X</div></div>'.PHP_EOL;	
 	$html.='	<div id="rpcontent">'.PHP_EOL;	
-	$html.='	<div class="titel">Layout Vorlage</div>'.PHP_EOL;
-	$html.='	<div class="links">deaktivieren</div>'.PHP_EOL;
-	$html.='	<div class="rechts"><input id="deaktivieren" type="checkbox"></div>'.PHP_EOL;	
+
 	$html.='	<div class="links">Deckkraft (<span id="opacity_wert" >'.$opacity.'</span>%)</div>'.PHP_EOL;
 	$html.='	<div id="slider_opacity"></div>'.PHP_EOL;
+
+	$html.='	<div><input id="deaktivieren" type="checkbox"><label for="deaktivieren">Layer deaktivieren</label></div>'.PHP_EOL;	
 	$html.='	<div class="rechts"></div> '.PHP_EOL;
-	$html.='	<div class="links">z-Index ändern</div>'.PHP_EOL;
-	$html.='	<div class="rechts"><input id="zcheck" type="checkbox" checked="true"></div>'.PHP_EOL;
+	$html.='	<div><input type="checkbox" class="checkbox" id="zcheck"><label for="zcheck">Höchster z-Index </label></div>'.PHP_EOL;
 
 if ($anzahlderbilder > 1) {
-	$html.='	<div>Layoutbild</div>'.PHP_EOL;
 	$html.='	<div>'.PHP_EOL;
 	$html.='	<select name="change" id="backgrounds">'.PHP_EOL;
 
