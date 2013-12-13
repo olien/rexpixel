@@ -118,6 +118,8 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 
 	$css.='
 	<style>
+
+	
 	#rpsetting {
 	   top: '.$positionoben.'px;
 	   left: '.$positionlinks.'px;
@@ -192,7 +194,7 @@ if ($anzahlderbilder > 1) {
 		$scripts.='	<script src="./files/addons/rexpixel/jquery.dd.min.js"></script>'.PHP_EOL;
 }
 		$scripts.='	<link rel="stylesheet" type="text/css" href="./files/addons/rexpixel/rexpixel.css" />'.PHP_EOL;
-		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/dark-hive/jquery-ui.css" />'.PHP_EOL;		
+		$scripts.='	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/smoothness/jquery-ui.css" />'.PHP_EOL;		
 		
 $scripts.='
 <script>
