@@ -3,14 +3,14 @@
 
 $mypage = "rexpixel";
 
-$REX['ADDON']['rxid'][$mypage] = 'xxx';
-$REX['ADDON']['name'][$mypage] = 'REXpixel';
-$REX['ADDON']['page'][$mypage] = $mypage;
-$REX['ADDON']['version'][$mypage] = "0.3";
-$REX['ADDON']['author'][$mypage] = "Oliver Kreischer";
-$REX['ADDON']['supportpage'][$mypage] = 'forum.redaxo.de';
-$REX['ADDON']['perm'][$mypage] = $mypage . "[]";
-$REX['PERM'][] = $mypage . "[]";
+$REX['ADDON']['rxid'][$mypage] 			= 'xxx';
+$REX['ADDON']['name'][$mypage] 			= 'REXpixel';
+$REX['ADDON']['page'][$mypage] 			= $mypage;
+$REX['ADDON']['version'][$mypage] 		= "0.5";
+$REX['ADDON']['author'][$mypage] 		= "Oliver Kreischer";
+$REX['ADDON']['supportpage'][$mypage] 	= 'forum.redaxo.de';
+$REX['ADDON']['perm'][$mypage] 			= $mypage . "[]";
+$REX['PERM'][] 							= $mypage . "[]";
 
 $startbg = '';
 
@@ -18,23 +18,30 @@ $REX['ADDON']['dev_tools']['bild'] = '';
 
 rex_register_extension('OUTPUT_FILTER', 'rexpixel');
 
-$layeraktiv 		= rex_request('rexpixel_layeraktiv', 'string', NULL);
-$opacitywert 		= rex_request('rexpixel_opacity', 'string', NULL);
-$position_left 		= rex_request('rexpixel_position_left', 'string', NULL);
-$position_top 		= rex_request('rexpixel_position_top', 'string', NULL);
-$openclose 			= rex_request('rexpixel_status', 'string', NULL);
-$zindex 			= rex_request('rexpixel_zindex', 'string', NULL);
-$aktivesbild		= rex_request('rexpixel_bildaktiv', 'string', NULL);
-$aktivesbildhoehe	= rex_request('rexpixel_height', 'string', NULL);
+$layeraktiv 				= rex_request('rexpixel_layeraktiv', 'string', NULL);
+$opacitywert 				= rex_request('rexpixel_opacity', 'string', NULL);
+$position_left 				= rex_request('rexpixel_position_left', 'string', NULL);
+$position_top 				= rex_request('rexpixel_position_top', 'string', NULL);
+$openclose 					= rex_request('rexpixel_status', 'string', NULL);
+$zindex 					= rex_request('rexpixel_zindex', 'string', NULL);
+$aktivesbild				= rex_request('rexpixel_bildaktiv', 'string', NULL);
+$aktivesbildhoehe			= rex_request('rexpixel_height', 'string', NULL);
+$rexpixel_img_position_left = rex_request('rexpixel_img_position_left', 'string', NULL);
+$rexpixel_img_position_top  = rex_request('rexpixel_img_position_top', 'string', NULL);
 
 $db_table = "rex_rexpixel";
 	$sql = rex_sql::factory();
 	$sql->setTable($db_table);
 	$sql->setWhere('id = 1');
 
-if ($zindex) {
+if (!$zindex <> 'drueber') {
 	$sql->setValue('zindex', $zindex );
 }
+
+if ($rexpixel_img_position_left <> NULL) {
+   $sql->setValue('posleft_img', $rexpixel_img_position_left);
+   $sql->setValue('postop_img', $rexpixel_img_position_top);	 
+} 
 
 if ($position_left[0] <> 0) {
    $sql->setValue('posleft', $position_left);
@@ -76,15 +83,17 @@ function rexpixel($params)
 	  $openclose	 	= $sql->getValue('openclose');  
 	  $zindex 			= $sql->getValue('zindex');
 	  $bildlayeraktiv	= $sql->getValue('layeraktiv');
-	  $layoutposition 	= $sql->getValue('layoutpos');	  
+	  $layoutposition 	= $sql->getValue('layoutpos');	
+	  $rexpixel_img_position_left	= $sql->getValue('posleft_img');
+	  $rexpixel_img_position_top 	= $sql->getValue('postop_img');	
 
 	$anzahlderbilder = count($bilder);
 
-if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
+if ($anzahlderbilder >= 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$bilder[0].');';
 } else if ($aktivesbild == "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/addons/rexpixel/'.$aktivesbild.');';	
-} else if ($aktivesbild <> null AND $aktivesbild != "rex_pixel_default.jpg") {
+} else if ($aktivesbild != null AND $aktivesbild != "rex_pixel_default.jpg") {
 	$startbg = 'background-image: url(./files/'.$aktivesbild.');';
 } else {
 	$startbg = 'background-image: url(./files/'.$bilder[0].');';
@@ -116,6 +125,14 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
       	 $opacity_str = 'opacity: 0.'.$opacity.';';
       }
 
+	if ($rexpixel_img_position_left <> NULL) {
+   		$imgposition = ' top: '.$rexpixel_img_position_top.'px; left: '.$rexpixel_img_position_left.'px;';
+	} else {
+   		$imgposition = 'top: 0;';
+
+	}
+
+
 	$css.='
 	<style>
 	#rpsetting {
@@ -126,7 +143,7 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	  #rexpixel {
 	  	display: '.$bildlayerdisplay.';
 	    position: absolute;
-		top: 0;
+		'.$imgposition.';
 	    '.$opacity_str.'
 	    width:100%;
 	    min-height: '.$aktivesbildhoehe.'px;
@@ -149,13 +166,17 @@ if ($anzahlderbilder == 1 AND $bilder[0] == "rex_pixel_default.jpg") {
 	$html.='	<div class="links"><input id="deaktivieren" type="checkbox"></div><div class="rechts"><label for="deaktivieren">Layer deaktivieren</label></div>'.PHP_EOL;	
 	$html.='	</div>'.PHP_EOL;
 	$html.='	<div class="rexpixel_wrapper">'.PHP_EOL;
-	$html.='	<div class="links"><input type="checkbox" class="checkbox" id="zcheck"></div><div class="rechts"><label for="zcheck">Höchster z-Index </label></div>'.PHP_EOL;
+	$html.='	<div class="links"><input id="zcheck" type="checkbox" class="checkbox" ></div><div class="rechts"><label for="zcheck">Höchster z-Index </label></div>'.PHP_EOL;
 	$html.='	</div>'.PHP_EOL;
 if ($anzahlderbilder > 1) {
 	$html.='	<div>'.PHP_EOL;
 	$html.='	<select name="change" id="backgrounds">'.PHP_EOL;
 
 	foreach($bilder as $bild) {
+
+	$ooPic = OOMedia::getMediaByFilename($bild);
+	if(is_object($ooPic)) {
+
 		if ($bild == "rex_pixel_default.jpg") {
 			$pfad = "./files/addons/rexpixel/";
 			$titel = "REXpixel default";
@@ -170,6 +191,7 @@ if ($anzahlderbilder > 1) {
 		} else {
 			$html.='<option data-image="'.$pfad.$bild.'" data-description="'.$titel.'" >'.$bild.'</option>'.PHP_EOL;	
 		}
+	} 
 	}
 
 
@@ -227,11 +249,9 @@ $(function() {
 	});
 
 
-$( "#rexpixel" ).draggable();
-	
 	$( "#rpsetting" ).draggable({ handle: "#rpheader",
 	    stop: function(event, ui) {
-			
+
 			Stoppos = $(this).position();
 
 			// alert("STOP: \nLeft: "+ Stoppos.left + "\nTop: " + Stoppos.top);
@@ -244,6 +264,24 @@ $( "#rexpixel" ).draggable();
 			
 	    }
 	});
+
+
+$( "#rexpixel" ).draggable({  
+	    stop: function(event, ui) {
+
+			StopposIMG = $(this).position();
+
+			// alert("STOP: \nLeft: "+ StopposIMG.left + "\nTop: " + StopposIMG.top);
+			
+			$.ajax({
+				type: "POST",
+				url: "index.php?rexpixel_img_position_left="+StopposIMG.left+"&rexpixel_img_position_top="+StopposIMG.top,
+				async: true
+		    });
+			
+	    }
+	});
+
 ';
 
 	
@@ -297,10 +335,14 @@ $scripts.='
 	});
 
 	$("#zcheck").change(function() {
-
 	    if(this.checked) {
-	
 		z = "drueber";
+
+		$.ajax({
+			type: "POST",
+			url: "index.php?rexpixel_zindex="+z,
+			async: true
+		});
 
    		 $(function(){
    	     	var maxZ = Math.max.apply(null,$.map($("body > *"), function(e,n){
@@ -315,9 +357,11 @@ $scripts.='
    	 	 });
 
 
+
+
 	    } else {
 
-         $("#rexpixel").css("z-index", "-1")
+        $("#rexpixel").css("z-index", "-1")
 	         z = "drunter";
 		}
 

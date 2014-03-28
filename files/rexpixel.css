@@ -61,23 +61,22 @@
 	border-top: 1px ridge grey;
 }
 
-
-
-
 #rpcontent.close {
 	display: none;
 }
 
-.links {
+#rpsetting .links {
 	float: left;
 	width: 100px;
 	color: #222;
 	text-align: right;
+
 }
 
-.rechts {
+#rpsetting .rechts {
 	float: right;
 	width: 140px;
+
 }
 
 .rexpixel_wrapper {
@@ -93,44 +92,76 @@
 	float: left;
 }
 
-.ui-widget-content { border: 1px solid #aaaaaa; background: #ffffff; color: #222222; }
-.ui-widget-header { border: 1px solid #aaaaaa; background: #cccccc; color: #222222;}
+#rpsetting .ui-widget-content { border: 1px solid #aaaaaa; background: #ffffff; color: #222222; font-family: verdana;}
+#rpsetting .ui-widget-header { border: 1px solid #aaaaaa; background: #cccccc; color: #222222;}
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #d3d3d3; background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #555555; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #555555; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #999999; background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
-.ui-state-hover a, .ui-state-hover a:hover { color: #212121; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; text-decoration: none; }
-.ui-widget :active { outline: none; }
+#rpsetting .ui-state-default,
+#rpsetting .ui-widget-content .ui-state-default,
+#rpsetting .ui-widget-header .ui-state-default { border: 1px solid #d3d3d3; background: #e6e6e6; font-weight: normal; color: #555555;}
 
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #fcefa1; background: #fbf9ee url(images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #363636; }
-.ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #363636; }
-.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
-.ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #cd0a0a; }
-.ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #cd0a0a; }
-.ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary { font-weight: bold; }
-.ui-priority-secondary, .ui-widget-content .ui-priority-secondary,  .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
-.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+#rpsetting .ui-state-default a,
+#rpsetting .ui-state-default a:link,
+#rpsetting .ui-state-default a:visited { color: #555555; text-decoration: none; }
+#rpsetting .ui-state-hover,
+#rpsetting .ui-widget-content .ui-state-hover,
+#rpsetting .ui-widget-header .ui-state-hover,
+#rpsetting .ui-state-focus,
+#rpsetting .ui-widget-content .ui-state-focus,
+#rpsetting .ui-widget-header .ui-state-focus { border: 1px solid #999999; background: #dadada; font-weight: normal; color: #212121; }
+#rpsetting .ui-state-hover a,
+#rpsetting .ui-state-hover a:hover { color: #212121; text-decoration: none; }
+#rpsetting .ui-state-active,
+#rpsetting .ui-widget-content .ui-state-active,
+#rpsetting .ui-widget-header .ui-state-active { border: 1px solid #aaaaaa; background: #ffffff; font-weight: normal; color: #212121; }
+#rpsetting .ui-state-active a,
+#rpsetting .ui-state-active a:link,
+#rpsetting .ui-state-active a:visited { color: #212121; text-decoration: none; }
+#rpsetting .ui-widget :active { outline: none; }
 
-.ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
+#rpsetting .ui-state-highlight,
+#rpsetting .ui-widget-content .ui-state-highlight,
+#rpsetting .ui-widget-header .ui-state-highlight  {border: 1px solid #fcefa1; background: #fbf9ee; color: #363636; }
+#rpsetting .ui-state-highlight a,
+#rpsetting .ui-widget-content .ui-state-highlight a,
+#rpsetting .ui-widget-header .ui-state-highlight a { color: #363636; }
+#rpsetting .ui-state-error,
+#rpsetting .ui-widget-content .ui-state-error,
+#rpsetting .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec; color: #cd0a0a; }
+#rpsetting .ui-state-error a,
+#rpsetting .ui-widget-content .ui-state-error a,
+#rpsetting .ui-widget-header .ui-state-error a { color: #cd0a0a; }
+#rpsetting .ui-state-error-text,
+#rpsetting .ui-widget-content .ui-state-error-text,
+#rpsetting .ui-widget-header .ui-state-error-text { color: #cd0a0a; }
+#rpsetting .ui-priority-primary,
+#rpsetting .ui-widget-content .ui-priority-primary,
+#rpsetting .ui-widget-header .ui-priority-primary { font-weight: bold; }
+#rpsetting .ui-priority-secondary,
+#rpsetting .ui-widget-content .ui-priority-secondary,
+#rpsetting .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+#rpsetting .ui-state-disabled,
+#rpsetting .ui-widget-content .ui-state-disabled,
+#rpsetting .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
 
-.ui-slider { position: relative; text-align: left; }
-.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 12px; height: 12px; cursor: pointer;outline:none; }
-.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: 5px; display: block; border: 0; background-position: 0 0; }
+#rpsetting .ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
-.ui-slider-horizontal { height: 5px; }
-.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
-.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
-.ui-slider-horizontal .ui-slider-range-min { left: 0; }
-.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+#rpsetting .ui-slider { position: relative; text-align: left; }
+#rpsetting .ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 12px; height: 12px; cursor: pointer;outline:none; }
+#rpsetting .ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: 5px; display: block; border: 0; background-position: 0 0; }
 
+#rpsetting .ui-slider-horizontal { height: 5px; }
+#rpsetting .ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+#rpsetting .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+#rpsetting .ui-slider-horizontal .ui-slider-range-min { left: 0; }
+#rpsetting .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
-.ddcommon 		{position:relative; cursor:pointer; width: 250px !important; margin: 5px 0 0 2px;}
-.ddcommon ul	{padding:0;margin:0;}
-.ddcommon ul li {list-style-type:none; }
+#rpsetting .ddcommon 		{position:relative; cursor:pointer; width: 250px !important; margin: 5px 0 0 2px; }
+#rpsetting .ddcommon ul	{padding:0;margin:0;}
+#rpsetting .ddcommon ul li {list-style-type:none; }
 
-.ddcommon .disabled img, .ddcommon .disabled span, .ddcommon.disabledAll{
+#rpsetting .ddcommon .disabled img,
+#rpsetting .ddcommon .disabled span,
+#rpsetting .ddcommon.disabledAll{
 opacity: .5; /* standard: ff gt 1.5, opera, safari */
 -ms-filter:"alpha(opacity=50)"; /* ie 8 */
 filter:alpha(opacity=50); /* ie lt 7 */
@@ -138,37 +169,44 @@ filter:alpha(opacity=50); /* ie lt 7 */
 -moz-opacity:.5; /* ff lt 1.5, netscape */
 color:#999999;
 }
-.ddcommon input.text{color:#7e7e7e;padding:0; position:absolute; background:#fff; display:block; width:98%; height:98%; left:2px; top:0; border:none;}
-.ddOutOfVision{display: none;}
+
+#rpsetting .ddcommon input.text{color:#7e7e7e;padding:0; position:absolute; background:#fff; display:block; width:98%; height:98%; left:2px; top:0; border:none;}
+#rpsetting .ddOutOfVision{display: none;}
 
 .ddcommon .ddTitle{padding:0; position:relative; display:inline-block; width:250px;}
-.ddcommon .ddTitle .ddTitleText{display:block; height: 40px; overflow: hidden;}
-.ddcommon .ddTitle .ddTitleText .ddTitleText{padding:0}
-.ddcommon .ddTitle .description{display:block;}
-.ddcommon .ddTitle .ddTitleText img{position:relative; vertical-align:middle; float:left; width: 35px; }
-.ddcommon .ddChild{
-	position:absolute;display:none;width:250px; margin: 0 0 0 -10px;
-	padding: 0 7px 0 10px; overflow-y:auto;
-	zoom:1; z-index:9999; border-right: 2px solid #999; border-left: 2px solid #999;}
+.ddcommon .ddTitle .ddTitleText{display:block; height: 40px; overflow: hidden;  color:#333; font-size: 10px;}
+#rpsetting .ddcommon .ddTitle .ddTitleText .ddTitleText{padding:0; }
+#rpsetting .ddcommon .ddTitle .description{display:block;  font-size: 10px; margin-top: 5px; }
+#rpsetting .ddcommon .ddTitle .ddTitleText img{position:relative; vertical-align:middle; float:left; width: 35px; }
+#rpsetting .ddcommon .ddChild{
+	position:absolute;display:none;width:254px; margin: 0 0 0 -10px;
+	padding: 10px 7px 10px 10px; overflow-y:auto;
+	zoom:1; z-index:9999; border-right: 3px solid #999; border-left: 3px solid #999;}
 
-.ddcommon .ddChild li .description{display:block; }
-.ddcommon .ddChild li img{border:0 none; position:relative;vertical-align:middle;float:left; width: 35px; }
+#rpsetting .ddcommon .ddChild li .description{display:block; }
+#rpsetting .ddcommon .ddChild li img{border:0 none; position:relative;vertical-align:middle;float:left; width: 35px; }
 
-.ddcommon .noBorderTop{border-top:none 0  !important; padding:0; margin:0;}
+#rpsetting .ddcommon .noBorderTop{border-top:none 0  !important; padding:0; margin:0;}
 /*************** default theme **********************/
-.dd { }
-.dd .ddTitle {color:#000;background:#e2e2e4;}
-.dd .ddTitle .ddTitleText	{padding:5px 20px 5px 5px; }
-.dd .ddTitle .ddTitleText .ddTitleText{padding:0;  overflow: hidden;}}
-.dd .ddTitle .description{font-size:10px; color:#eee}
-.dd .ddTitle .ddTitleText img{padding-right:5px; width: 35px;}
-.dd .ddChild {border:1px solid #c3c3c3; background-color:#fff; left:-1px;}
-.dd .ddChild li{padding:5px; background-color:#fff; border-bottom:1px solid #c3c3c3; height: 40px; overflow: hidden;}
-.dd .ddChild li .description{color:#666;}
-.dd .ddChild li .ddlabel{color:#333;}
-.dd .ddChild li.hover{background-color:#f2f2f2}
-.dd .ddChild li img{padding:0 6px 3px 0; width: 35px;}
-.dd .ddChild li.optgroup{padding:0;}
-.dd .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
-.dd .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
-.dd .ddChild li.selected{background-color:#d5d5d5; color:#000;}
+#rpsetting .dd { }
+#rpsetting .dd .ddTitle {color:#000;background:#e2e2e4;}
+#rpsetting .dd .ddTitle .ddTitleText	{padding:5px 20px 5px 5px; }
+#rpsetting .dd .ddTitle .ddTitleText .ddTitleText{padding:0;  overflow: hidden;}}
+#rpsetting .dd .ddTitle .description{font-size:10px; color:#eee; margin-top: 10px; border: 1px solid green;}
+#rpsetting .dd .ddTitle .ddTitleText img{padding-right:5px; width: 35px;}
+#rpsetting .dd .ddChild {border:1px solid #c3c3c3; background-color:#fff; left:-1px;}
+#rpsetting .dd .ddChild li{padding:5px; background-color:#fff; border-bottom:1px solid #c3c3c3; height: 40px; overflow: hidden;}
+#rpsetting .dd .ddChild li .description{color:#666; font-size: 10px; margin-top: 5px;}
+#rpsetting .dd .ddChild li .ddlabel{ color:#333; font-weight: bold; font-size: 10px;}
+#rpsetting .dd .ddChild li.hover{background-color:#f2f2f2}
+#rpsetting .dd .ddChild li img{padding:0 6px 3px 0; width: 35px;}
+#rpsetting .dd .ddChild li.optgroup{padding:0;}
+#rpsetting .dd .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
+#rpsetting .dd .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
+#rpsetting .dd .ddChild li.selected{background-color:#d5d5d5; color:#000;}
+
+
+
+
+
+
